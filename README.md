@@ -1,7 +1,7 @@
-# Skyline Visualization
+# Healthy Yelp Viz
 
 > skyline visualization
-## Prerequest
+## Healthy Yelp Viz
 
 `Python 2.7`, `virtualenv`, `node`
 
