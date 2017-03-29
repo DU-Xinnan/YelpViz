@@ -1,11 +1,16 @@
 <template>
     <div id="app">
         <navbar></navbar>
-        <div class="row" :style="{width: setting.width + 'px', height: setting.height + 'px'}" style="margin: 0">
-            <control-panel :setting="setting"></control-panel>
-            <overview-left></overview-left>
-            <overview-Right></overview-Right>
-            <detail-view></detail-view>
+        <div class="row" :style="{height: (setting.height - 20) + 'px', width: setting.width + 'px'}" style="position: absolute;">
+            <control-panel :setting="setting" class="col-2"></control-panel>
+            <div class="col-10">
+                <div class="row" style="height: 60%">
+                    <overview></overview>
+                </div>
+                <div class="row" style="height: 40%">
+                    <detail-view></detail-view>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -14,8 +19,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/nav-bar';
 import ControlPanel from './components//control-panel';
-import OverviewLeft from './components/overview-left';
-import OverviewRight from './components/overview-right';
+import Overview from './components/overview';
 import DetailView from './components/detail-view';
 
 export default {
@@ -23,8 +27,7 @@ export default {
     components: {
         Navbar,
         ControlPanel,
-        OverviewLeft,
-        OverviewRight,
+        Overview,
         DetailView,
     },
     data() {

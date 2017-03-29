@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-toggleable-md navbar-inverse navbar-dark bg-inverse">
-        <a class="navbar-brand" href="#">Healthy Yelp Viz</a>
+	    <a class="navbar-brand" href="#">Healthy Yelp Viz</a>
     </nav>
 </template>
 
@@ -14,4 +14,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>
