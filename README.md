@@ -1,6 +1,6 @@
 ## Healthy Yelp Viz
 
-###Project Description
+Project Description
 > Healthy Yelp Viz
 > This is a course project of COMP4901F `Data Visualization`@HKUST.
 
@@ -8,12 +8,10 @@
 
 > In this project, we will use deep learning to predict how “healthy” a food is by analysing its photo as well as the title of the photo.
 
-<hr/ >
 
 ### Prerequest
 
 `Python 2.7`, `virtualenv`, `node`
-<hr/ >
 
 ### Web Server Setup
 
@@ -30,7 +28,7 @@ pip install -r requirements.txt
 # run web server
 python run.py
 ```
-<hr/ >
+
 
 ### Front End Setup
 
