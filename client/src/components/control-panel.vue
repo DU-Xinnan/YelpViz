@@ -24,8 +24,8 @@ export default {
 
 <style lang="stylus" scoped>
 #control-panel
-    border-style: solid;
-    border-width: 1px;
+    border-style: solid
+    border-width: 1px
 </style>
 
 

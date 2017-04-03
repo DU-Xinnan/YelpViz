@@ -23,6 +23,6 @@ export default {
     display: inline-block
     padding: 0
     margin-bottom: 0
-    border-style: solid;
-    border-width: 1px;
+    border-style: solid
+    border-width: 1px
 </style>

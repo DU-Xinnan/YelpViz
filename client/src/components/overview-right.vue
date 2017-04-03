@@ -21,6 +21,6 @@ export default {
     height: 100%
     display: inline-block
     padding: 0
-    border-style: solid;
-    border-width: 1px;
+    border-style: solid
+    border-width: 1px
 </style>
