@@ -1,5 +1,7 @@
 <template>
-    <div class="col-2" id="control-panel">
+    <div id="control-panel">
+        <h5>Control Panel</h5>
+        <img src="../pic/ControlPanel.png">
     </div>
 </template>
 
@@ -24,8 +26,15 @@ export default {
 
 <style lang="stylus" scoped>
 #control-panel
-    border-style: solid
-    border-width: 1px
+    border-style: solid;
+    border-width: 1px;
+    height: 100%
+h5
+    padding-left: 5%
+    padding-top: 10%
+img
+    padding-left: 5%
+    width: 100%
 </style>
 
 

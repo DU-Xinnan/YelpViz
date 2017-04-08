@@ -1,11 +1,19 @@
-# Healthy Yelp Viz
+## Healthy Yelp Viz
 
+Project Description
 > Healthy Yelp Viz
-## Prerequest
+> This is a course project of COMP4901F `Data Visualization`@HKUST.
+
+> It’s the first time that yelp dataset provides photos, so we decide to make use of photos and hopefully we can have some new findings.
+
+> In this project, we will use deep learning to predict how “healthy” a food is by analysing its photo as well as the title of the photo.
+
+
+### Prerequest
 
 `Python 2.7`, `virtualenv`, `node`
 
-## Web Server Setup
+### Web Server Setup
 
 ``` bash
 # initalize virtual env
@@ -21,7 +29,8 @@ pip install -r requirements.txt
 python run.py
 ```
 
-## Front End Setup
+
+### Front End Setup
 
 ``` bash
 # enter the front end sub-directory
@@ -36,3 +45,4 @@ npm run dev
 # build for production with minification
 npm run build
 ```
+

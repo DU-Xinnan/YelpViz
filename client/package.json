@@ -1,8 +1,8 @@
 {
-  "name": "skyline",
+  "name": "YelpHealthVis",
   "version": "1.0.0",
-  "description": "skyline visualization",
-  "author": "Yanhong Wu <wdan1990@gmail.com>",
+  "description": "Yelp Health Index Visualization",
+  "author": "Yuan CHEN <constantchen525@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -20,7 +20,7 @@
     "jquery": "^3.1.1",
     "lodash": "^4.17.3",
     "tether": "^1.4.0",
-    "vue": "^2.1.0",
+    "vue": "^2.2.0",
     "vue-material": "^0.5.2"
   },
   "devDependencies": {
@@ -64,6 +64,7 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "lolex": "^1.4.0",
+    "leaflet": "^1.0.3",
     "mocha": "^3.1.0",
     "nightwatch": "^0.9.8",
     "opn": "^4.0.2",

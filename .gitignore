@@ -4,3 +4,6 @@ __pycache__/
 server/__pycache__/
 server/models/__pycache__/
 server/routes/__pycache__/
+npm-debug.log
+.vscode
+jsconfig.json
