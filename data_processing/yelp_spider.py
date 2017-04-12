@@ -93,16 +93,16 @@ def generateResNames(city):
             restaurantsNames.append({"name": joinedName, "id": restaurant["business_id"]})
     return restaurantsNames
 
-def main(city):
+def main(city, counter = 0, restaurantNum = 0):
     restaurants = generateResNames(city)
-    problem_res_names = []
     total_num_restaurants = len(restaurants)
-    current_restaurant = 0
+    current_restaurant = restaurantNum
     mapping = dict()
-    counter = 0
     folder_name = city + "_photos"
+    photo_file_handle = open(city + "_photos_info.json", "a+")
+    problem_file_handle = open(city+"problems.json", "a+")
     os.makedirs(folder_name)
-    for restaurant in restaurants:
+    for restaurant in restaurants[restaurantNum:]:
         mapping[restaurant["id"]] = []
         current_restaurant += 1
         print("save photos progress: {}/{}".format(current_restaurant, total_num_restaurants))
@@ -116,22 +116,27 @@ def main(city):
         biz_photo_url = "https://en.yelp.com.hk/biz_photos/" + restaurant["name"] + "?tab=food"
         urls = fetch_restaurant(biz_photo_url)
         if len(urls) == 0:
-            problem_res_names.append(restaurant)
-            print restaurant["name"]
+            problem_file_handle.write(json.dumps(restaurant, indent = 4))
+            problem_file_handle.write(",\n")
+            print "No information for " + restaurant["name"]
         else:
             for link in urls:
-                mapping[restaurant["id"]].append(restaurant["id"] + str(counter) + '.jpg')
-                filePath = folder_name + '/' + restaurant["id"] +str(counter) + '.jpg'
+                fileName = restaurant["id"] + str(counter) + '.jpg'
+                mapping[restaurant["id"]].append(fileName)
+                filePath = folder_name + '/' + fileName
                 save_file(filePath, link)
+                photo_file_handle.write(json.dumps([restaurant["id"], fileName], indent = 4))
+                photo_file_handle.write(",\n")
                 counter += 1
+    photo_file_handle.close()
+    problem_file_handle.close()
     with open(city + "mapping" + ".json", 'w') as writeFile:
         strData = json.dumps(mapping, indent = 4)
         writeFile.write(strData)
-    with open(city+"problems"+"json", "w") as problemsWriteFile:
-        strData = json.dumps(problem_res_names, indent = 4)
-        problemsWriteFile.write(strData)
     print "finish"
 
 if __name__ == "__main__":
-    main("Urbana")
+    # main(cityName, imageSequenceNumber, resaurantSequenceNumber), in case the program stopped unexpectedly
+    # you can resume at a specific restaurant
+    main(city = "Urbana", counter = 1, restaurantNum = 0)
 
