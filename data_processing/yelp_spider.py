@@ -113,7 +113,7 @@ def main(city):
         #     print("find restaurant exists!")
         #     continue
 
-        biz_photo_url = "https://en.yelp.com.hk/biz_photos/" + restaurant["name"]
+        biz_photo_url = "https://en.yelp.com.hk/biz_photos/" + restaurant["name"] + "?tab=food"
         urls = fetch_restaurant(biz_photo_url)
         if len(urls) == 0:
             problem_res_names.append(restaurant)
@@ -133,5 +133,5 @@ def main(city):
     print "finish"
 
 if __name__ == "__main__":
-    main("Pittsburgh")
+    main("Urbana")
 
