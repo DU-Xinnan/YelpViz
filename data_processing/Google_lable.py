@@ -1,26 +1,25 @@
 import io
 import os
+def getLables(city):
+    # Imports the Google Cloud client library
+    from google.cloud import vision
+    
+    # Instantiates a client
+    vision_client = vision.Client()
 
-# Imports the Google Cloud client library
-from google.cloud import vision
+    # The name of the image file to annotate
+    file_name = os.path.join(
+        os.path.dirname(__file__),
+        'Madison_photos/_6b9CtXi4fQqiu2VjCVpTQ12006.jpg')
 
-# Instantiates a client
-vision_client = vision.Client()
+    # Loads the image into memory
+    with io.open(file_name, 'rb') as image_file:
+        content = image_file.read()
+        image = vision_client.image(content=content)
 
-# The name of the image file to annotate
-file_name = os.path.join(
-    os.path.dirname(__file__),
-    'Madison_photos/_6b9CtXi4fQqiu2VjCVpTQ12006.jpg')
+    # Performs label detection on the image file
+    labels = image.detect_labels()
 
-# Loads the image into memory
-with io.open(file_name, 'rb') as image_file:
-    content = image_file.read()
-    image = vision_client.image(
-        content=content)
-
-# Performs label detection on the image file
-labels = image.detect_labels()
-
-print('Labels:')
-for label in labels:
-    print(label.description)
+    print('Labels:')
+    for label in labels:
+        print(label.description)
