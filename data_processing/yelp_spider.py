@@ -138,5 +138,5 @@ def main(city, counter = 0, restaurantNum = 0):
 if __name__ == "__main__":
     # main(cityName, imageSequenceNumber, resaurantSequenceNumber), in case the program stopped unexpectedly
     # you can resume at a specific restaurant
-    main(city = "Urbana", counter = 1, restaurantNum = 0)
+    main(city = "Madison", counter = 1, restaurantNum = 0)
 
