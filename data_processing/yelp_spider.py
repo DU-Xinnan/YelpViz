@@ -80,7 +80,7 @@ def getName(name):
     name = name.lower().split(' ')
     name = [x for x in name if x != '']
     name = '-'.join(name)
-    name = name.replace('&', "and").replace("'", "")
+    name = name.replace('&', "and").replace("'", "").replace(",", "").replace(".", "")
     return name
 
 def generateResNames(city):
