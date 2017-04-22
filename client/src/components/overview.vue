@@ -24,7 +24,7 @@
     Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
     Vue.component('v-marker', Vue2Leaflet.Marker);
     Vue.component('v-polygon', Vue2Leaflet.Polygon);
-    
+
     const debug = false;
 
     export default {
