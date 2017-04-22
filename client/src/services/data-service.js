@@ -6,6 +6,7 @@ class Service {
             instance = this;
         }
         this.data = undefined;
+        this.rawData = undefined;
         return instance;
     }
 
@@ -13,8 +14,17 @@ class Service {
         this.data = data;
     }
 
+    setRawData(data) {
+        this.rawData = data;
+        this.setData(data);
+    }
+
     getData() {
         return this.data;
+    }
+
+    getRawData() {
+        return this.rawData;
     }
 
 }
