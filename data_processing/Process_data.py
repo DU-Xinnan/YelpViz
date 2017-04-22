@@ -16,9 +16,10 @@ def readjson(city, fileName):
     cityFile = open(basePath + fileName, 'r')
     return json.loads(cityFile.read())  
 def process_restaurant(city):
-    cityData = readjson(city, "Cleveland.json")
-    labelsData = readjson(city, "Cleveland_lables.json")
-    mappingData = readjson(city, "Clevelandmapping.json")
+    cityData = readjson(city, "Madison.json")
+    labelsData = readjson(city, "Madision_lables.json")
+    mappingData = readjson(city, "Madisonmapping.json")
+    healthData = readjson(city, "Madision_health_index.json")
     problemRestaurantsIds = []
     for restaurant in cityData:
         business_id = restaurant["business_id"]
@@ -33,11 +34,12 @@ def process_restaurant(city):
                         images.remove(image)
                 except:
                     images.remove(image)
-            restaurant["images"] = images
+            images_healthindex = [{'image': image, 'health_index': healthData[image]} for image in images]
+            restaurant["images"] = images_healthindex
     cityData = [restaurant for restaurant in cityData if restaurant['business_id'] not in problemRestaurantsIds]
-    writeFile = open('Cleveland_with_images.json', 'w')
+    writeFile = open('Madision_with_healthindex.json', 'w')
     writeFile.write(json.dumps(cityData, indent = 4))
     writeFile.close()
 if __name__ == "__main__":
     #process_prediction("Cleveland")
-    process_restaurant("Cleveland")
+    process_restaurant("Madision")
