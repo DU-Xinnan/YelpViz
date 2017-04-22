@@ -4,7 +4,8 @@
             <div id="map-area" class="col">
                 <v-map :zoom="zoom" :center="center" keep-alive>
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
-                    <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="foo(marker.businessID)"></v-marker>
+                    <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="mClickHandler(marker.businessID)"></v-marker>
+                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=1 :stroke=false fillColor="#80FF66" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
                 </v-map>
             </div>
@@ -24,8 +25,9 @@
     Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
     Vue.component('v-marker', Vue2Leaflet.Marker);
     Vue.component('v-polygon', Vue2Leaflet.Polygon);
+    Vue.component('v-circle', Vue2Leaflet.LCircle);
     
-    const debug = false;
+    const debug = true;
 
     export default {
         name: 'Overview',
@@ -33,7 +35,7 @@
             // this.appendMarkers();
             // console.log('component overview', this);
             const map = this.$children[0].mapObject;
-            map.panTo([47.413420, -1.219482]);
+            // map.panTo([47.413420, -1.219482]);
             if (debug) console.log('this', this);
             this.$children[0].$children.map((child, i) => {
                 if (i === 0 || child.$el.className !== 'marker') return 0;
@@ -58,7 +60,7 @@
                     });
                     return 0;
                 });
-                this.markers = newMarkers;
+                this.points = newMarkers;
             });
 
             PipeService.$on(PipeService.CLICK_POINT, (id) => {
@@ -115,10 +117,11 @@
                     L.latLng(47.429220, -1.219482),
                     L.latLng(47.423220, -1.219482),
                 ],
+                points: [],
             };
         },
         methods: {
-            foo(id) {
+            mClickHandler(id) {
                 PipeService.$emit(PipeService.CLICK_POINT, id);
             },
             appendMarkers() {
