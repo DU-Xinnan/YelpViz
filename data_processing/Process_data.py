@@ -14,7 +14,33 @@ def process_prediction(city):
 def readjson(city, fileName):
     basePath = "cities_photos/"+ city +"/"
     cityFile = open(basePath + fileName, 'r')
-    return json.loads(cityFile.read())  
+    return json.loads(cityFile.read()) 
+
+def merge_checkin(city):
+    cityData = readjson(city, city + "_with_healthindex.json")
+    f = open("checkin/"+city+"_checkin.json", 'r')
+    checkinData = json.loads(f.read())
+    for restaurant in cityData:
+        id = restaurant['business_id']
+        try:
+            restaurant["checkin"] = checkinData[id]
+        except:
+            restaurant["checkin"] = []
+            print id
+    writeFile = open(city + "_with_checkin.json", 'w')
+    strData = json.dumps(cityData, indent=4)
+    writeFile.write(strData)
+    
+
+def process_checkin(city):
+    checkinData = json.loads(open("checkin/"+city+"_checkin.json", 'r').read())
+    result = {}
+    for restaurant in checkinData:
+        id = restaurant.keys()[0]
+        result[id] = restaurant[id][0]
+    writeFile = open(city + "_checkin.json", 'w')
+    writeFile.write(json.dumps(result, indent = 4))
+
 def process_restaurant(city):
     cityData = readjson(city, "Madison.json")
     labelsData = readjson(city, "Madision_lables.json")
@@ -42,4 +68,4 @@ def process_restaurant(city):
     writeFile.close()
 if __name__ == "__main__":
     #process_prediction("Cleveland")
-    process_restaurant("Madision")
+    merge_checkin("Madision")
