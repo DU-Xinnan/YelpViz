@@ -2,7 +2,7 @@ import json
 
 class Madison():
 
-    dataURL = './data/Madison.json'
+    dataURL = './data/Madison_Full.json'
 
     @classmethod
     def get_data(cls):

@@ -2,7 +2,7 @@ import json
 
 class Cleveland():
 
-    dataURL = './data/Cleveland.json'
+    dataURL = './data/Cleveland_Full.json'
 
     @classmethod
     def get_data(cls):
