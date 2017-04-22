@@ -2,7 +2,7 @@
     <div id="app">
         <navbar></navbar>
         <div class="row" :style="{height: (setting.height ) + 'px', width: setting.width + 'px'}" style="position: absolute;">
-            <control-panel :setting="setting" class="col-1"></control-panel>
+            <control-panel :setting="setting" class="col-2"></control-panel>
             <div class="col-7">
                 <div class="row" style="height: 100%">
                     <overview></overview>

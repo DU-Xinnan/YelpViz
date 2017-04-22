@@ -13,11 +13,13 @@
 </template>
 
 <script>
+<<<<<<< HEAD
     import L from 'leaflet';
     import Vue from 'vue';
     import Vue2Leaflet from 'vue2-leaflet';
     // import * as d3 from 'd3';
     import PipeService from '../services/pipe-service';
+    import DataService from '../services/data-service';
 
     Vue.component('v-map', Vue2Leaflet.Map);
     Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
@@ -42,6 +44,10 @@
                 return 0;
             });
 
+            PipeService.$on(PipeService.DATA_CHANGE, () => {
+                console.log(DataService.getRawData()[1]);
+            });
+            
             PipeService.$on(PipeService.CLICK_POINT, (id) => {
                 console.log('id', id);
             });
@@ -116,7 +122,8 @@
                 //     .attr('icon', this.icon);
             },
         },
-    };
+    },
+};
 </script>
 
 <style lang='stylus' scoped>

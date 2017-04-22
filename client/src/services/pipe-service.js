@@ -5,6 +5,7 @@ const PipeService = new Vue({
         // add event name here like this: SELECT_POINT: select_point
         // SELECT_POINT: select_point,
         CLICK_POINT: 'click_point',
+        DATA_CHANGE: 'data-change',
     },
 });
 
