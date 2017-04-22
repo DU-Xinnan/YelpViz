@@ -2,11 +2,11 @@
     <div id="overview">
         <div class="row" style="height: 100%; width: 103%">
             <div id="map-area" class="col">
-                <v-map :zoom="zoom" :center="center" keep-alive>
+                <v-map :zoom="zoom" :center="center" keep-alive @l-zoomend="zoomHandler($event)">
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
                     <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="mClickHandler(marker.businessID)"></v-marker>
-                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=1 :stroke=false fillColor="#80FF66" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
+                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=0.2 :stroke=false fillColor="#80FF66" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
                 </v-map>
             </div>
         </div>
@@ -17,7 +17,8 @@
     import L from 'leaflet';
     import Vue from 'vue';
     import Vue2Leaflet from 'vue2-leaflet';
-    // import * as d3 from 'd3';
+    // import HeatmapOverlay from 'leaflet-heatmap';
+    import * as d3 from 'd3';
     import PipeService from '../services/pipe-service';
     import DataService from '../services/data-service';
 
@@ -33,10 +34,29 @@
         name: 'Overview',
         mounted() {
             // this.appendMarkers();
-            // console.log('component overview', this);
             const map = this.$children[0].mapObject;
+            const baseLayer = this.$children[0].$children[0].$tileLayer;
+            // cosnt baseMaps = {
+            //     "TileLayer": baseLayer
+            // };
             // map.panTo([47.413420, -1.219482]);
+            console.log('map', map);
             if (debug) console.log('this', this);
+            if (debug) console.log('base layer', baseLayer);
+
+            // const cfg = {
+            //     radius: 0.008,
+            //     maxOpacity: 0.8,
+            //     scaleRadius: true,
+            //     useLocalExtrema: true,
+            //     latField: 'lat',
+            //     lngField: 'lng',
+            //     valueField: 'count',
+            // };
+            // const heatmapLayer = new HeatmapOverlay(cfg);
+            // if (debug) console.log('heatmap layer', heatmapLayer);
+
+            // Bind popup
             this.$children[0].$children.map((child, i) => {
                 if (i === 0 || child.$el.className !== 'marker') return 0;
                 if (debug) console.log(`child ${i}`, child);
@@ -50,16 +70,129 @@
                 if (debug) {
                     console.log('data 2', tmp[1]);
                 }
-                map.panTo([tmp[0].latitude, tmp[0].longitude]);
-                map.setZoom(11);
+                const len = Math.floor(tmp.length / 2);
+                map.panTo([tmp[len].latitude, tmp[len].longitude]);
+                map.setZoom(1);
+                map.setZoom(10);
                 const newMarkers = [];
+
+                // Get hexgon created
+                const hexRadius = 64e-4;
+                const hex1 = hexRadius / 2;
+                const hex2 = (hexRadius / 2) * Math.sqrt(3);
+                const bounds = map.getBounds();
+                const nw = bounds.getNorthWest();
+                const se = bounds.getSouthEast();
+                const hexWidth = (Math.abs(se.lng - nw.lng) / hexRadius / 3) + 1;
+                const hexHeight = (Math.abs(se.lat - nw.lat) / hex2) + 1;
+                if (debug) console.log('boundary', map, nw, se, hexWidth, hexHeight, map.getZoom());
+                const newHexBuffer = [];
+                for (let i = 0; i < hexHeight; i += 1) {
+                    const tmpRow = [];
+                    for (let j = 0; j < hexWidth; j += 1) {
+                        tmpRow.push(0);
+                    }
+                    newHexBuffer.push(tmpRow);
+                }
+                // console.log('new hex buffer', newHexBuffer);
+                // const center = {
+                //     lat: nw.lat,
+                //     lng: nw.lng,
+                // };
+                // let t = 0;
+                L.circle(L.latLng(nw.lat, nw.lng), { color: 'green' }).addTo(map);
+                // for (let h = 0; h < hexHeight; h += 1) {
+                //     for (let w = 0; w < hexWidth; w += 1) {
+                        // const latLngs = [
+                        //     L.latLng(center.lat - hex2, center.lng - hex1),
+                        //     L.latLng(center.lat - hex2, center.lng + hex1),
+                        //     L.latLng(center.lat, center.lng + hexRadius),
+                        //     L.latLng(center.lat + hex2, center.lng + hex1),
+                        //     L.latLng(center.lat + hex2, center.lng - hex1),
+                        //     L.latLng(center.lat, center.lng - hexRadius),
+                        // ];
+                //         newHexBuffer.push(L.polygon(latLngs, { color: 'red' }).addTo(map));
+                //         center.lng += (2 * hexRadius);
+                //     }
+                //     center.lat -= hexRadius;
+                //     if (t === 0) {
+                //         center.lng = nw.lng + (hexRadius * 1.5);
+                //         t += 1;
+                //     } else {
+                //         center.lng = nw.lng;
+                //         t = 0;
+                //     }
+                //     break;
+                // }
+                // console.log('add to the layer');
+
+                // const heatmapData = { max: 10, data: [] };
                 tmp.map((m) => {
                     newMarkers.push({
                         latLng: L.latLng(m.latitude, m.longitude),
                         businessID: m.business_id,
                     });
+
+                    const x = Math.floor((nw.lat - m.latitude) / hex2);
+                    const y = Math.floor((m.longitude - nw.lng) / hexRadius / 1.5);
+                    if (x < 0 || y < 0 || x >= hexHeight || y > hexWidth * 2) return 0;
+                    if ((x + y) % 2 === 0) {
+                        // pattern one
+                        const dx = nw.lat - m.latitude - (x * hex2);
+                        const dy = m.longitude - nw.lng - (y * hexRadius * 1.5);
+                        if (dy < hex1 ||
+                        (dy > hex1 && dy < hexRadius && ((hexRadius - dy) * Math.sqrt(3) > dx))) {
+                            newHexBuffer[x][Math.floor(y / 2)] += 1;
+                        } else {
+                            newHexBuffer[x + 1][Math.floor((y + 1) / 2)] += 1;
+                        }
+                    } else {
+                        // pattern two
+                        const dx = nw.lat - m.latitude - (x * hex2);
+                        const dy = m.longitude - nw.lng - (y * hexRadius * 1.5);
+                        if (dy < hex1 ||
+                        (dy > hex1 && dy < hexRadius &&
+                        (dx > (hex1 - ((hexRadius - dy) * Math.sqrt(3)))))) {
+                            newHexBuffer[x + 1][Math.floor((y) / 2)] += 1;
+                        } else {
+                            newHexBuffer[x][Math.floor((y + 1) / 2)] += 1;
+                        }
+                    }
+
+                    // heatmapData.data.push({
+                    //     lat: m.latitude,
+                    //     lng: m.longitude,
+                    //     count: Math.floor(Math.random() * 6) - 6,
+                    // });
+
                     return 0;
                 });
+
+                for (let x = 0; x < hexHeight; x += 1) {
+                    for (let y = 0; y < hexWidth; y += 1) {
+                        const cnt = newHexBuffer[x][y];
+                        if (cnt !== 0) {
+                            const hexLat = nw.lat - (x * hex2);
+                            let hexLng = nw.lng + (y * 3 * hexRadius);
+                            if (x % 2 === 1) {
+                                hexLng += (1.5 * hexRadius);
+                            }
+                            const latLngs = [
+                                L.latLng(hexLat + hex2, hexLng - hex1),
+                                L.latLng(hexLat + hex2, hexLng + hex1),
+                                L.latLng(hexLat, hexLng + hexRadius),
+                                L.latLng(hexLat - hex2, hexLng + hex1),
+                                L.latLng(hexLat - hex2, hexLng - hex1),
+                                L.latLng(hexLat, hexLng - hexRadius),
+                            ];
+                            L.polygon(latLngs, { color: 'green', fillColor: 'red', weight: '1' }).addTo(map);
+                        }
+                    }
+                }
+                // heatmapLayer.setData(heatmapData);
+                // heatmapLayer.addTo(map);
+                // if (debug) console.log('after mounted', heatmapLayer);
+
                 this.points = newMarkers;
             });
 
@@ -69,7 +202,7 @@
         },
         data() {
             return {
-                zoom: 13,
+                zoom: 10,
                 center: [47.413220, -1.219482],
                 url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -125,12 +258,17 @@
                 PipeService.$emit(PipeService.CLICK_POINT, id);
             },
             appendMarkers() {
-                // const vmap = d3.select('#map');
-                // vmap.selectAll('VMarker')
-                //     .data(this.markers[0])
-                //     .append('VMarker')
-                //     .attr('latLng', d => d)
-                //     .attr('icon', this.icon);
+                const vmap = d3.select('#map');
+                console.log('vmap', vmap);
+                console.log('d3', d3);
+                vmap.selectAll('VMarker')
+                    .data(this.markers[0])
+                    .append('VMarker')
+                    .attr('latLng', d => d)
+                    .attr('icon', this.icon);
+            },
+            zoomHandler(event) {
+                console.log('event is', event);
             },
         },
 };
