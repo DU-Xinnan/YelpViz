@@ -1,5 +1,6 @@
-from server.models.NBA import NBA
-
+from server.models.Cleveland import Cleveland
+from server.models.LasVegas import LasVegas
+from server.models.Madison import Madison
 
 def get_class_instance(dataname):
     last_module_name = dataname
