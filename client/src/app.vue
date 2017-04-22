@@ -1,13 +1,15 @@
 <template>
     <div id="app">
         <navbar></navbar>
-        <div class="row" :style="{height: (setting.height - 20) + 'px', width: setting.width + 'px'}" style="position: absolute;">
+        <div class="row" :style="{height: (setting.height ) + 'px', width: setting.width + 'px'}" style="position: absolute;">
             <control-panel :setting="setting" class="col-2"></control-panel>
-            <div class="col-10">
-                <div class="row" style="height: 60%">
+            <div class="col-7">
+                <div class="row" style="height: 100%">
                     <overview></overview>
                 </div>
-                <div class="row" style="height: 40%">
+            </div>
+            <div class="col-3">
+                <div class="row" style="height: 100%">
                     <detail-view></detail-view>
                 </div>
             </div>
@@ -17,8 +19,9 @@
 
 <script>
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'keen-ui/dist/keen-ui.min.css';
 import Navbar from './components/nav-bar';
-import ControlPanel from './components//control-panel';
+import ControlPanel from './components/control-panel/control-panel';
 import Overview from './components/overview';
 import DetailView from './components/detail-view';
 

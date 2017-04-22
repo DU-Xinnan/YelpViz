@@ -1,24 +1,14 @@
 <template>
     <div id="detail-view-container">
-        <h5>Detailed View</h5>
+        <h2>Detailed View</h2>
         <div class="container">
-            <div class="row">
-                <div class="col-3">
-                    <h6>Food Text Wordle</h6>
-                    <img src="../pic/foodtext.png">
-                </div>
-                <div class="col-3">
-                    <h6>Clients Flow Chart</h6>
-                    <img src="../pic/clock.png">
-                </div>
-                <div class="col-3">
-                    <h6>Sentiment</h6>
-                    <img src="../pic/sentiment.png">
-                </div>
-                <div class="col-3">
-                    <h6>Food Category</h6>
-                    <img src="../pic/pie.png">
-                </div>
+            <div class='control-colum'>
+            </div>
+             <div class='control-colum'>
+            </div>
+             <div class='control-colum'>
+            </div>
+             <div class='control-colum'>
             </div>
         </div>
     </div>
@@ -41,21 +31,19 @@ export default {
 <style lang="stylus" scoped>
 #detail-view-container
     width: 100%
-    border-style: solid
-    border-width: 1px
-h5
-    padding-left: 30px
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4)
+h2
+    font-size: 1.05em
+    margin-bottom: 5px
+    text-align: center
 .container
-    width: 95%
+    width: 100%
     height: 100%
 .row
     height: 100%
-.col-3
-    height: 90%
+.control-colum
+    height: 24%
     border-style: dashed
     border-width: 1px
     border-color: grey
-img
-    height: 80%
-    width: 100%
 </style>
