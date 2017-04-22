@@ -1,3 +1,5 @@
+.DS_Store
+*.pyc
 node_modules/
 venv/
 data_processing/Pittsburgh_photos/
@@ -9,4 +11,3 @@ server/routes/__pycache__/
 npm-debug.log
 .vscode/
 jsconfig.json
-*.pyc
