@@ -48,7 +48,7 @@ export default {
 @import './control-panel.styl'
 
 .skyline-select
-    width: 48%
+    width: 100%
     height: 24px
     font-size: 1em
     padding-top: 1px

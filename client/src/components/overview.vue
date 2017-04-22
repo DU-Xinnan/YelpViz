@@ -26,8 +26,8 @@
     Vue.component('v-marker', Vue2Leaflet.Marker);
     Vue.component('v-polygon', Vue2Leaflet.Polygon);
     Vue.component('v-circle', Vue2Leaflet.LCircle);
-    
-    const debug = true;
+
+    const debug = false;
 
     export default {
         name: 'Overview',

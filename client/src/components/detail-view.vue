@@ -43,6 +43,7 @@ h2
     height: 100%
 .control-colum
     height: 24%
+    width: 110%
     border-style: dashed
     border-width: 1px
     border-color: grey
