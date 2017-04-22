@@ -18,12 +18,13 @@
     "d3": "^4.4.0",
     "d3-tip": "^0.7.1",
     "jquery": "^3.1.1",
+    "leaflet": "^1.0.3",
     "keen-ui": "^1.0.0",
     "lodash": "^4.17.3",
     "tether": "^1.4.0",
     "vue": "^2.2.0",
     "vue-material": "^0.5.2",
-    "vue2-google-maps": "^0.7.5"
+    "vue2-leaflet": "0.0.44"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
