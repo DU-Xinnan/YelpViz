@@ -24,6 +24,11 @@ function request(url, params, type, callback) {
     });
 }
 
+function getDataList(callback) {
+    const url = `${devApiUrl}/data_list`;
+    request(url, {}, GET_REQUEST, callback);
+}
+
 function getData(name, callback) {
     const url = `${devApiUrl}/data/${name}`;
     const params = {};
@@ -34,4 +39,3 @@ export default {
     getDataList,
     getData,
 };
-

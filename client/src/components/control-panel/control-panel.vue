@@ -10,7 +10,7 @@
 
 <script>
 import './control-panel.styl';
-// import DataLoader from './data-loader';
+import DataLoader from './data-loader';
 
 export default {
     name: 'ControlPanel',
@@ -21,7 +21,7 @@ export default {
         };
     },
     components: {
-        // DataLoader,
+        DataLoader,
     },
     props: {
         setting: Object,
