@@ -34,8 +34,8 @@ export default {
                 const Data = response.data;
                 DataService.setRawData(Data);
                 // DataService.genFullAttributeTable(Data.attributeTable);
-                DataService.computeRealDistribution(Data.pointTable, Data.attributeTable);
-                DataService.computeDistribution();
+                // DataService.computeRealDistribution(Data.pointTable, Data.attributeTable);
+                // DataService.computeDistribution();
                 PipeService.$emit(PipeService.DATA_CHANGE);
             });
         },

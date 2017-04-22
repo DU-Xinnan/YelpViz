@@ -14,7 +14,7 @@ def index():
 
 @app.route('/api/data_list')
 def get_data_list():
-    data_list = ['NBA']
+    data_list = ['LasVegas']
     return json.dumps(data_list)
 
 

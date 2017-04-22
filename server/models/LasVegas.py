@@ -1,9 +1,8 @@
 import json
 
+class LasVegas():
 
-class NBA():
-
-    dataURL = './data/NBA.json'
+    dataURL = './data/LasVegas.json'
 
     @classmethod
     def get_data(cls):
@@ -15,9 +14,9 @@ class NBA():
     @classmethod
     def filter_data(cls, data):
         res = data
-        point_table = []
-        for point in res['pointTable']:
-            if point['year'] == '2008':
-                point_table.append(point)
-        res['pointTable'] = point_table
+        # point_table = []
+        # for point in res['pointTable']:
+        #     if point['year'] == '2008':
+        #         point_table.append(point)
+        # res['pointTable'] = point_table
         return res
