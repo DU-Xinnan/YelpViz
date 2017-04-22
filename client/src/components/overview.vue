@@ -4,7 +4,7 @@
             <div id="map-area" class="col">
                 <v-map :zoom="zoom" :center="center" keep-alive>
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
-                    <v-marker v-for="marker in markers" :key="marker.id" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="foo(marker.businessID)"></v-marker>
+                    <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="foo(marker.businessID)"></v-marker>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
                 </v-map>
             </div>
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
     import L from 'leaflet';
     import Vue from 'vue';
     import Vue2Leaflet from 'vue2-leaflet';
@@ -45,9 +44,23 @@
             });
 
             PipeService.$on(PipeService.DATA_CHANGE, () => {
-                console.log(DataService.getRawData()[1]);
+                const tmp = DataService.getRawData();
+                if (debug) {
+                    console.log('data 2', tmp[1]);
+                }
+                map.panTo([tmp[0].latitude, tmp[0].longitude]);
+                map.setZoom(11);
+                const newMarkers = [];
+                tmp.map((m) => {
+                    newMarkers.push({
+                        latLng: L.latLng(m.latitude, m.longitude),
+                        businessID: m.business_id,
+                    });
+                    return 0;
+                });
+                this.markers = newMarkers;
             });
-            
+
             PipeService.$on(PipeService.CLICK_POINT, (id) => {
                 console.log('id', id);
             });
@@ -61,7 +74,6 @@
                 markers: [{
                     latLng: L.latLng(47.423220, -1.209482),
                     businessID: 1,
-                    id: 1,
                 },
                 {
                     latLng: L.latLng(47.415320, -1.229482),
@@ -71,22 +83,18 @@
                 {
                     latLng: L.latLng(47.414420, -1.229482),
                     businessID: 3,
-                    id: 3,
                 },
                 {
                     latLng: L.latLng(47.410520, -1.219482),
                     businessID: 4,
-                    id: 4,
                 },
                 {
                     latLng: L.latLng(47.427620, -1.219482),
                     businessID: 5,
-                    id: 5,
                 },
                 {
                     latLng: L.latLng(47.428720, -1.219482),
                     businessID: 6,
-                    id: 6,
                 },
                 ],
                 icon: L.icon({
@@ -122,7 +130,6 @@
                 //     .attr('icon', this.icon);
             },
         },
-    },
 };
 </script>
 
