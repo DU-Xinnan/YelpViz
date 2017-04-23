@@ -6,7 +6,6 @@
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
                     <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="mClickHandler(marker.businessID)"></v-marker>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
-                    <v-circle v-for="point in points" :key="point.businessID" :weight="strokeWeight" :latLng="point.latLng" :radius="point.cntPhoto" fillColor="#1111FF" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
                 </v-map>
             </div>
         </div>
@@ -139,7 +138,8 @@
                     newMarkers.push({
                         latLng: L.latLng(m.latitude, m.longitude),
                         businessID: m.business_id,
-                        cntPhoto: pointRadius + 0.2,
+                        cntPhoto: pointRadius,
+                        healthInd: healthIndex,
                     });
 
                     const x = Math.floor((nw.lat - m.latitude) / hex2);
@@ -194,14 +194,28 @@
                                 L.latLng(hexLat - hex2, hexLng - hex1),
                                 L.latLng(hexLat, hexLng - hexRadius),
                             ];
-                            L.polygon(latLngs, { color: 'grey', fillColor: 'blue', weight: '0.1' }).addTo(map);
+                            L.polygon(latLngs, { color: 'grey', fillColor: 'grey', weight: '0.1' }).addTo(map);
                         }
                     }
                 }
                 // heatmapLayer.setData(heatmapData);
                 // heatmapLayer.addTo(map);
                 // if (debug) console.log('after mounted', heatmapLayer);
-
+                newMarkers.map((m) => {
+                    const c = L.circle(m.latLng, {
+                        radius: m.cntPhoto * 2,
+                        fillColor: this.getColor(m.healthInd),
+                        stroke: false,
+                        fillOpacity: 1,
+                    }).addTo(map);
+                    c.on({
+                        click: () => {
+                            this.mClickHandler(m.businessID);
+                        },
+                    });
+                    if (debug) console.log('new circle', c);
+                    return 0;
+                });
                 this.points = newMarkers;
             });
 
@@ -213,7 +227,7 @@
             return {
                 zoom: 10,
                 center: [47.413220, -1.219482],
-                url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                url: 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZmVuZ3llZSIsImEiOiJjajFzbXgxNjMwMGtzMnhwcDViYTA2c3lyIn0.BYlQuGouxr1_6wTmRbD99g',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 markers: [{
                     latLng: L.latLng(47.423220, -1.209482),
@@ -266,6 +280,9 @@
             };
         },
         methods: {
+            foo() {
+                console.log('foo called');
+            },
             mClickHandler(id) {
                 PipeService.$emit(PipeService.CLICK_POINT, id);
             },
