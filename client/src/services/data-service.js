@@ -8,6 +8,7 @@ class Service {
         this.data = undefined;
         this.rawData = undefined;
         this.checkinTime = undefined;
+        this.dataWithValidImg = undefined;
         return instance;
     }
 
@@ -19,6 +20,7 @@ class Service {
         this.rawData = data;
         this.setData(data);
         this.setCheckInTimeData();
+        this.setDataWithValidImg();
     }
 
     getData() {
@@ -41,6 +43,19 @@ class Service {
     getCheckInTimeData() {
         console.log(this.checkinTime);
         return this.checkinTime;
+    }
+
+    setDataWithValidImg() {
+        this.dataWithValidImg = [];
+        this.data.forEach((restaurant) => {
+            if (restaurant.images.length > 0) {
+                this.dataWithValidImg.push(restaurant);
+            }
+        });
+    }
+
+    getDataWithValidImg() {
+        return this.dataWithValidImg;
     }
 
 }
