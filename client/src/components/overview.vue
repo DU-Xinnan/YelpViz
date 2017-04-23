@@ -190,6 +190,8 @@
                         },
                     });
                     if (debug) console.log('new circle', c);
+                    const popContent = `<div><b>Res Id: ${m.businessID} </b><img src="" /></div>`;
+                    c.bindPopup(popContent);
                     return 0;
                 });
                 this.points = newMarkers;
@@ -282,7 +284,7 @@
                     .attr('icon', this.icon);
             },
             zoomHandler(event) {
-                console.log('event is', event);
+                if (debug) console.log('event is', event);
             },
             getcolor(point) {
                 if (point === 'null') {
