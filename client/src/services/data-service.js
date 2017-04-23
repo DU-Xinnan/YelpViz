@@ -39,7 +39,7 @@ class Service {
     }
 
     getCheckInTimeData() {
-        console.log(this.checkinTime);
+        // console.log(this.checkinTime);
         return this.checkinTime;
     }
 

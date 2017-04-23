@@ -3,7 +3,7 @@
         <h1>Detailed View</h1>
         <div class="container">
             <div class='control-colum'>
-                <!--<check-in-vis></check-in-vis> -->
+                <check-in-vis></check-in-vis>
                 <img src='./radarchart.jpg' style="width: 60% ;height: 100%; margin-left: 20%" >
             </div>
             <div class='control-colum'>
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-// import CheckInVis from './checkin-vis';
+import CheckInVis from './checkin-vis';
 
 export default {
     name: 'DetailView',
     components: {
-    //    CheckInVis,
+        CheckInVis,
     },
     mounted() {
     },
