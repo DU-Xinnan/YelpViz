@@ -65,7 +65,7 @@
             });
 
             PipeService.$on(PipeService.DATA_CHANGE, () => {
-                const tmp = DataService.getRawData();
+                const tmp = DataService.getDataWithValidImg();
                 if (debug) {
                     console.log('data 2', tmp[1]);
                 }
@@ -110,6 +110,7 @@
                         businessID: m.business_id,
                         cntPhoto: pointRadius,
                         healthInd: healthIndex,
+                        sampleImg: m.images[0].image,
                     });
 
                     const x = Math.floor((nw.lat - m.latitude) / hex2);
@@ -170,7 +171,9 @@
                                 L.latLng(hexLat - hex2, hexLng - hex1),
                                 L.latLng(hexLat, hexLng - hexRadius),
                             ];
-                            L.polygon(latLngs, { color: 'grey', fillColor: this.getColor(avgHealthInd), weight: '0.1', fillOpacity: 0.7 }).addTo(map);
+                            const t = L.polygon(latLngs, { color: 'grey', fillColor: this.getColor(avgHealthInd), weight: '0.1', fillOpacity: 0.7 }).addTo(map);
+                            const cxx = `<h>Health Index: ${avgHealthInd}</h>`;
+                            t.bindPopup(cxx);
                         }
                     }
                 }
@@ -179,7 +182,8 @@
                 // if (debug) console.log('after mounted', heatmapLayer);
                 newMarkers.map((m) => {
                     const c = L.circle(m.latLng, {
-                        radius: m.cntPhoto * 2,
+                        // radius: m.cntPhoto * 2,
+                        radius: 10,
                         fillColor: this.getColor(m.healthInd),
                         stroke: false,
                         fillOpacity: 1,
@@ -190,7 +194,8 @@
                         },
                     });
                     if (debug) console.log('new circle', c);
-                    const popContent = `<div><b>Res Id: ${m.businessID} </b><img src="" /></div>`;
+                    const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
+                    console.log(popContent);
                     c.bindPopup(popContent);
                     return 0;
                 });
