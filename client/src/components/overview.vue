@@ -97,7 +97,7 @@
 
                 // const heatmapData = { max: 10, data: [] };
                 tmp.map((m) => {
-                    const pointRadius = Math.sqrt(m.images.length);
+                    const pointRadius = Math.log(m.images.length);
                     let healthIndex = 0;
                     m.images.map((image) => {
                         healthIndex += (image.health_index / m.images.length);
@@ -179,7 +179,7 @@
                 // if (debug) console.log('after mounted', heatmapLayer);
                 newMarkers.map((m) => {
                     const c = L.circle(m.latLng, {
-                        radius: m.cntPhoto * 2,
+                        radius: m.cntPhoto * 5,
                         fillColor: this.getColor(m.healthInd),
                         stroke: false,
                         fillOpacity: 1,
