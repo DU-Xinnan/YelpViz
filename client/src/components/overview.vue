@@ -260,6 +260,15 @@
             mClickHandler(id) {
                 PipeService.$emit(PipeService.CLICK_POINT, id);
             },
+            getColor(number) {
+                const colors = ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#ffffff', '#92c5de', '#4393c3', '#2166ac', '#053061'];
+                const domain = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+                const colorScale = d3.scaleLinear()
+                    // .domain([-0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8])
+                    .domain(domain)
+                    .range(colors);
+                return colorScale(number);
+            },
             appendMarkers() {
                 const vmap = d3.select('#map');
                 console.log('vmap', vmap);
