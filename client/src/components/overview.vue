@@ -6,7 +6,7 @@
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
                     <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="mClickHandler(marker.businessID)"></v-marker>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
-                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=0.2 :stroke=false fillColor="#80FF66" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
+                    <v-circle v-for="point in points" :key="point.businessID" :weight=1 :latLng="point.latLng" :radius="point.cntPhoto" fillColor="#1111FF" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
                 </v-map>
             </div>
         </div>
@@ -100,7 +100,6 @@
                 //     lng: nw.lng,
                 // };
                 // let t = 0;
-                L.circle(L.latLng(nw.lat, nw.lng), { color: 'green' }).addTo(map);
                 // for (let h = 0; h < hexHeight; h += 1) {
                 //     for (let w = 0; w < hexWidth; w += 1) {
                         // const latLngs = [
@@ -128,9 +127,18 @@
 
                 // const heatmapData = { max: 10, data: [] };
                 tmp.map((m) => {
+                    const pointRadius = Math.sqrt(m.images.length);
+                    let healthIndex = 0;
+                    m.images.map((image) => {
+                        healthIndex += (image.health_index / m.images.length);
+                        return 0;
+                    });
+                    if (debug) console.log('health Index', healthIndex);
+                    if (debug) console.log('cnt photo number', pointRadius);
                     newMarkers.push({
                         latLng: L.latLng(m.latitude, m.longitude),
                         businessID: m.business_id,
+                        cntPhoto: pointRadius + 0.2,
                     });
 
                     const x = Math.floor((nw.lat - m.latitude) / hex2);
