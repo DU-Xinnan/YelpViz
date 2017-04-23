@@ -90,40 +90,10 @@
                 for (let i = 0; i < hexHeight; i += 1) {
                     const tmpRow = [];
                     for (let j = 0; j < hexWidth; j += 1) {
-                        tmpRow.push(0);
+                        tmpRow.push([0, 0]);
                     }
                     newHexBuffer.push(tmpRow);
                 }
-                // console.log('new hex buffer', newHexBuffer);
-                // const center = {
-                //     lat: nw.lat,
-                //     lng: nw.lng,
-                // };
-                // let t = 0;
-                // for (let h = 0; h < hexHeight; h += 1) {
-                //     for (let w = 0; w < hexWidth; w += 1) {
-                        // const latLngs = [
-                        //     L.latLng(center.lat - hex2, center.lng - hex1),
-                        //     L.latLng(center.lat - hex2, center.lng + hex1),
-                        //     L.latLng(center.lat, center.lng + hexRadius),
-                        //     L.latLng(center.lat + hex2, center.lng + hex1),
-                        //     L.latLng(center.lat + hex2, center.lng - hex1),
-                        //     L.latLng(center.lat, center.lng - hexRadius),
-                        // ];
-                //         newHexBuffer.push(L.polygon(latLngs, { color: 'red' }).addTo(map));
-                //         center.lng += (2 * hexRadius);
-                //     }
-                //     center.lat -= hexRadius;
-                //     if (t === 0) {
-                //         center.lng = nw.lng + (hexRadius * 1.5);
-                //         t += 1;
-                //     } else {
-                //         center.lng = nw.lng;
-                //         t = 0;
-                //     }
-                //     break;
-                // }
-                // console.log('add to the layer');
 
                 // const heatmapData = { max: 10, data: [] };
                 tmp.map((m) => {
@@ -151,9 +121,11 @@
                         const dy = m.longitude - nw.lng - (y * hexRadius * 1.5);
                         if (dy < hex1 ||
                         (dy > hex1 && dy < hexRadius && ((hexRadius - dy) * Math.sqrt(3) > dx))) {
-                            newHexBuffer[x][Math.floor(y / 2)] += 1;
+                            newHexBuffer[x][Math.floor(y / 2)][0] += 1;
+                            newHexBuffer[x][Math.floor(y / 2)][1] += healthIndex;
                         } else {
-                            newHexBuffer[x + 1][Math.floor((y + 1) / 2)] += 1;
+                            newHexBuffer[x + 1][Math.floor((y + 1) / 2)][0] += 1;
+                            newHexBuffer[x + 1][Math.floor((y + 1) / 2)][1] += healthIndex;
                         }
                     } else {
                         // pattern two
@@ -162,9 +134,11 @@
                         if (dy < hex1 ||
                         (dy > hex1 && dy < hexRadius &&
                         (dx > (hex1 - ((hexRadius - dy) * Math.sqrt(3)))))) {
-                            newHexBuffer[x + 1][Math.floor((y) / 2)] += 1;
+                            newHexBuffer[x + 1][Math.floor((y) / 2)][0] += 1;
+                            newHexBuffer[x + 1][Math.floor((y) / 2)][1] += healthIndex;
                         } else {
-                            newHexBuffer[x][Math.floor((y + 1) / 2)] += 1;
+                            newHexBuffer[x][Math.floor((y + 1) / 2)][0] += 1;
+                            newHexBuffer[x][Math.floor((y + 1) / 2)][1] += healthIndex;
                         }
                     }
 
@@ -179,7 +153,9 @@
 
                 for (let x = 0; x < hexHeight; x += 1) {
                     for (let y = 0; y < hexWidth; y += 1) {
-                        const cnt = newHexBuffer[x][y];
+                        const cnt = newHexBuffer[x][y][0];
+                        const avgHealthInd = newHexBuffer[x][y][1] / cnt;
+                        if (debug) console.log('cnt and hIndex', cnt, avgHealthInd);
                         if (cnt !== 0) {
                             const hexLat = nw.lat - (x * hex2);
                             let hexLng = nw.lng + (y * 3 * hexRadius);
@@ -194,7 +170,7 @@
                                 L.latLng(hexLat - hex2, hexLng - hex1),
                                 L.latLng(hexLat, hexLng - hexRadius),
                             ];
-                            L.polygon(latLngs, { color: 'grey', fillColor: 'grey', weight: '0.1' }).addTo(map);
+                            L.polygon(latLngs, { color: 'grey', fillColor: this.getColor(avgHealthInd), weight: '0.1', fillOpacity: 0.7 }).addTo(map);
                         }
                     }
                 }
