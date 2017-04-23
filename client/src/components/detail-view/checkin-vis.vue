@@ -48,13 +48,18 @@ export default {
             let maxFlow = 0;
             // const reg = /(?<=:)[\w+.-]+/;
             Object.keys(this.data).forEach((businessid) => {
-                const restTime = JSON.parse(JSON.stringify(this.data[businessid]));
-                const restTimeflow = [];
-                restTime.forEach((time) => {
-                    restTimeflow.push(parseInt(time.match(/:(.*)/, '')[1], 10));
-                });
-                const restTimemax = _.max(restTimeflow);
-                maxFlow = restTimemax > maxFlow ? restTimemax : maxFlow;
+                const restTime = [];
+                if (this.data[businessid] !== undefined) {
+                    this.data[businessid].forEach((time) => {
+                        restTime.push(JSON.parse(JSON.stringify(time)));
+                    });
+                    const restTimeflow = [];
+                    restTime.forEach((time) => {
+                        restTimeflow.push(parseInt(time.match(/:(.*)/, '')[1], 10));
+                    });
+                    const restTimemax = _.max(restTimeflow);
+                    maxFlow = restTimemax > maxFlow ? restTimemax : maxFlow;
+                }
             });
             return maxFlow;
         },
@@ -91,8 +96,10 @@ export default {
             // const self = this;
             // const degree = 360 / 24;
 
-            const clockRadius = this.computeMaxFlow();
-            console.log(clockRadius);
+            const maxFlow = this.computeMaxFlow();
+            // console.log(clockRadius);
+            console.log(maxFlow);
+            // const flowScale = d3.linearScale()
         },
     },
 };
