@@ -97,7 +97,7 @@
 
                 // const heatmapData = { max: 10, data: [] };
                 tmp.map((m) => {
-                    const pointRadius = Math.sqrt(m.images.length);
+                    const pointRadius = Math.log(m.images.length);
                     let healthIndex = 0;
                     m.images.map((image) => {
                         healthIndex += (image.health_index / m.images.length);
@@ -171,7 +171,7 @@
                                 L.latLng(hexLat - hex2, hexLng - hex1),
                                 L.latLng(hexLat, hexLng - hexRadius),
                             ];
-                            const t = L.polygon(latLngs, { color: 'grey', fillColor: this.getColor(avgHealthInd), weight: '0.1', fillOpacity: 0.7 }).addTo(map);
+                            const t = L.polygon(latLngs, { color: 'grey', fillColor: this.getColor(avgHealthInd), weight: '0.1', fillOpacity: 0.4 }).addTo(map);
                             const cxx = `<h>Health Index: ${avgHealthInd}</h>`;
                             t.bindPopup(cxx);
                         }
@@ -182,8 +182,7 @@
                 // if (debug) console.log('after mounted', heatmapLayer);
                 newMarkers.map((m) => {
                     const c = L.circle(m.latLng, {
-                        // radius: m.cntPhoto * 2,
-                        radius: 10,
+                        radius: m.cntPhoto * 30,
                         fillColor: this.getColor(m.healthInd),
                         stroke: false,
                         fillOpacity: 1,
@@ -210,7 +209,7 @@
             return {
                 zoom: 10,
                 center: [47.413220, -1.219482],
-                url: 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZmVuZ3llZSIsImEiOiJjajFzbXgxNjMwMGtzMnhwcDViYTA2c3lyIn0.BYlQuGouxr1_6wTmRbD99g',
+                url: 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoieGlubmFuIiwiYSI6ImNqMXViOG1iZTAwOXYyd21pN3MzZGh6ajYifQ.PjGhMRDKZAOKTcOjXYujUg',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 markers: [{
                     latLng: L.latLng(47.423220, -1.209482),
@@ -260,6 +259,7 @@
                 points: [],
                 fillColor: 'green',
                 fillOpacity: 0.2,
+                whetherStroke: false,
             };
         },
         methods: {
