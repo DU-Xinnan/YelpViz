@@ -6,7 +6,7 @@
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
                     <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="mClickHandler(marker.businessID)"></v-marker>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
-                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=0.2 :stroke=false fillColor="#80FF66" class="point" @l-click="mClickHandler(point.businessID)"></v-circle>
+                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=0.2 :stroke="false" class="point" :fillColor="fillColor" :fillOpacity="fillOpacity" @l-click="mClickHandler(point.businessID)"></v-circle>
                 </v-map>
             </div>
         </div>
@@ -73,7 +73,7 @@
                 const len = Math.floor(tmp.length / 2);
                 map.panTo([tmp[len].latitude, tmp[len].longitude]);
                 map.setZoom(1);
-                map.setZoom(10);
+                map.setZoom(11);
                 const newMarkers = [];
 
                 // Get hexgon created
@@ -82,6 +82,7 @@
                 const hex2 = (hexRadius / 2) * Math.sqrt(3);
                 const bounds = map.getBounds();
                 const nw = bounds.getNorthWest();
+                console.log(nw);
                 const se = bounds.getSouthEast();
                 const hexWidth = (Math.abs(se.lng - nw.lng) / hexRadius / 3) + 1;
                 const hexHeight = (Math.abs(se.lat - nw.lat) / hex2) + 1;
@@ -100,7 +101,7 @@
                 //     lng: nw.lng,
                 // };
                 // let t = 0;
-                L.circle(L.latLng(nw.lat, nw.lng), { color: 'green' }).addTo(map);
+                // L.circle(L.latLng(nw.lat, nw.lng), { fillColor: 'green' }).addTo(map);
                 // for (let h = 0; h < hexHeight; h += 1) {
                 //     for (let w = 0; w < hexWidth; w += 1) {
                         // const latLngs = [
@@ -185,7 +186,7 @@
                                 L.latLng(hexLat - hex2, hexLng - hex1),
                                 L.latLng(hexLat, hexLng - hexRadius),
                             ];
-                            L.polygon(latLngs, { color: 'green', fillColor: 'red', weight: '1' }).addTo(map);
+                            L.polygon(latLngs, { color: 'grey', fillColor: 'blue', weight: '0.1' }).addTo(map);
                         }
                     }
                 }
@@ -251,6 +252,8 @@
                     L.latLng(47.423220, -1.219482),
                 ],
                 points: [],
+                fillColor: 'green',
+                fillOpacity: 0.2,
             };
         },
         methods: {
@@ -269,6 +272,12 @@
             },
             zoomHandler(event) {
                 console.log('event is', event);
+            },
+            getcolor(point) {
+                if (point === 'null') {
+                    return 'green';
+                }
+                return 'green';
             },
         },
 };
