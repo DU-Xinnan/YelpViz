@@ -16,7 +16,7 @@
     import L from 'leaflet';
     import Vue from 'vue';
     import Vue2Leaflet from 'vue2-leaflet';
-    // import HeatmapOverlay from 'leaflet-heatmap';
+    import HeatmapOverlay from 'leaflet-heatmap';
     import * as d3 from 'd3';
     import PipeService from '../services/pipe-service';
     import DataService from '../services/data-service';
@@ -34,26 +34,25 @@
         mounted() {
             // this.appendMarkers();
             const map = this.$children[0].mapObject;
-            const baseLayer = this.$children[0].$children[0].$tileLayer;
-            // cosnt baseMaps = {
-            //     "TileLayer": baseLayer
-            // };
-            // map.panTo([47.413420, -1.219482]);
-            console.log('map', map);
+            let heatmapLayer;
+            let heatmapData;
+            // const baseLayer = this.$children[0].$children[0].$tileLayer;
+            if (debug) console.log('map', map);
             if (debug) console.log('this', this);
-            if (debug) console.log('base layer', baseLayer);
 
-            // const cfg = {
-            //     radius: 0.008,
-            //     maxOpacity: 0.8,
-            //     scaleRadius: true,
-            //     useLocalExtrema: true,
-            //     latField: 'lat',
-            //     lngField: 'lng',
-            //     valueField: 'count',
-            // };
-            // const heatmapLayer = new HeatmapOverlay(cfg);
-            // if (debug) console.log('heatmap layer', heatmapLayer);
+            if (this.enableHeatmap) {
+                const cfg = {
+                    radius: 0.008,
+                    maxOpacity: 0.8,
+                    scaleRadius: true,
+                    useLocalExtrema: true,
+                    latField: 'lat',
+                    lngField: 'lng',
+                    valueField: 'count',
+                };
+                heatmapLayer = new HeatmapOverlay(cfg);
+                if (debug) console.log('heatmap layer', heatmapLayer);
+            }
 
             // Bind popup
             this.$children[0].$children.map((child, i) => {
@@ -66,6 +65,8 @@
 
             PipeService.$on(PipeService.DATA_CHANGE, () => {
                 const tmp = DataService.getDataWithValidImg();
+
+                if (this.enableHeatmap) heatmapData = { max: 10, data: [] };
                 if (debug) {
                     console.log('data 2', tmp[1]);
                 }
@@ -73,19 +74,20 @@
                 map.panTo([tmp[len].latitude, tmp[len].longitude]);
                 map.setZoom(1);
                 map.setZoom(11);
-                const newMarkers = [];
 
-                // Get hexgon created
-                const hexRadius = 64e-4;
+                const newMarkers = [];
+                // setup hexagon params
+                const hexRadius = this.hRadius;
                 const hex1 = hexRadius / 2;
                 const hex2 = (hexRadius / 2) * Math.sqrt(3);
                 const bounds = map.getBounds();
                 const nw = bounds.getNorthWest();
-                console.log(nw);
                 const se = bounds.getSouthEast();
                 const hexWidth = (Math.abs(se.lng - nw.lng) / hexRadius / 3) + 1;
                 const hexHeight = (Math.abs(se.lat - nw.lat) / hex2) + 1;
                 if (debug) console.log('boundary', map, nw, se, hexWidth, hexHeight, map.getZoom());
+
+                // Datastructure for hexagon
                 const newHexBuffer = [];
                 for (let i = 0; i < hexHeight; i += 1) {
                     const tmpRow = [];
@@ -95,7 +97,7 @@
                     newHexBuffer.push(tmpRow);
                 }
 
-                // const heatmapData = { max: 10, data: [] };
+                // Process each restaurant
                 tmp.map((m) => {
                     const pointRadius = Math.sqrt(m.images.length);
                     let healthIndex = 0;
@@ -143,15 +145,18 @@
                         }
                     }
 
-                    // heatmapData.data.push({
-                    //     lat: m.latitude,
-                    //     lng: m.longitude,
-                    //     count: Math.floor(Math.random() * 6) - 6,
-                    // });
+                    if (this.enableHeatmap) {
+                        heatmapData.data.push({
+                            lat: m.latitude,
+                            lng: m.longitude,
+                            count: Math.floor(Math.random() * 6) - 6,
+                        });
+                    }
 
                     return 0;
                 });
 
+                // Creata the hexagon grid
                 for (let x = 0; x < hexHeight; x += 1) {
                     for (let y = 0; y < hexWidth; y += 1) {
                         const cnt = newHexBuffer[x][y][0];
@@ -177,16 +182,24 @@
                         }
                     }
                 }
-                // heatmapLayer.setData(heatmapData);
-                // heatmapLayer.addTo(map);
-                // if (debug) console.log('after mounted', heatmapLayer);
+
+                // create the heatmap
+                if (this.enableHeatmap) {
+                    heatmapLayer.setData(heatmapData);
+                    heatmapLayer.addTo(map);
+                    if (debug) console.log('after mounted', heatmapLayer);
+                }
+
+                // draw the restaurant on the map
+                const tempPoints = [];
                 newMarkers.map((m) => {
                     const c = L.circle(m.latLng, {
                         // radius: m.cntPhoto * 2,
-                        radius: 10,
+                        radius: 4 * m.cntPhoto * (20 - map.getZoom()),
                         fillColor: this.getColor(m.healthInd),
                         stroke: false,
                         fillOpacity: 1,
+                        selfDefine: m.cntPhoto,
                     }).addTo(map);
                     c.on({
                         click: () => {
@@ -195,13 +208,15 @@
                     });
                     if (debug) console.log('new circle', c);
                     const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
-                    console.log(popContent);
+                    if (debug) console.log(popContent);
                     c.bindPopup(popContent);
+                    tempPoints.push(c);
                     return 0;
                 });
-                this.points = newMarkers;
+                this.points = tempPoints;
             });
 
+            // Pipeservices
             PipeService.$on(PipeService.CLICK_POINT, (id) => {
                 console.log('id', id);
             });
@@ -215,27 +230,6 @@
                 markers: [{
                     latLng: L.latLng(47.423220, -1.209482),
                     businessID: 1,
-                },
-                {
-                    latLng: L.latLng(47.415320, -1.229482),
-                    businessID: 2,
-                    id: 2,
-                },
-                {
-                    latLng: L.latLng(47.414420, -1.229482),
-                    businessID: 3,
-                },
-                {
-                    latLng: L.latLng(47.410520, -1.219482),
-                    businessID: 4,
-                },
-                {
-                    latLng: L.latLng(47.427620, -1.219482),
-                    businessID: 5,
-                },
-                {
-                    latLng: L.latLng(47.428720, -1.219482),
-                    businessID: 6,
                 },
                 ],
                 icon: L.icon({
@@ -260,6 +254,8 @@
                 points: [],
                 fillColor: 'green',
                 fillOpacity: 0.2,
+                enableHeatmap: false,
+                hRadius: 64e-4,
             };
         },
         methods: {
@@ -290,6 +286,19 @@
             },
             zoomHandler(event) {
                 if (debug) console.log('event is', event);
+                const map = event.target;
+                if (this.points.length > 0) {
+                    // resize the circle points
+                    this.points.map((point) => {
+                        // console.log('point is', point);
+                        if ((20 - map.getZoom()) < 7) {
+                            point.setRadius(point.options.selfDefine * (20 - map.getZoom()));
+                        } else {
+                            point.setRadius(4 * point.options.selfDefine * (20 - map.getZoom()));
+                        }
+                        return 0;
+                    });
+                }
             },
             getcolor(point) {
                 if (point === 'null') {
