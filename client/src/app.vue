@@ -23,7 +23,7 @@ import 'keen-ui/dist/keen-ui.min.css';
 import Navbar from './components/nav-bar';
 import ControlPanel from './components/control-panel/control-panel';
 import Overview from './components/overview';
-import DetailView from './components/detail-view';
+import DetailView from './components/detail-view/detail-view';
 
 export default {
     name: 'App',
