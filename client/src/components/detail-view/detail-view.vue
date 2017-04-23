@@ -1,27 +1,30 @@
 <template>
     <div id="detail-view-container">
         <h1>Detailed View</h1>
-        <check-in-vis></check-in-vis>
         <div class="container">
             <div class='control-colum'>
+                <!--<check-in-vis></check-in-vis> -->
+                <img src='./radarchart.jpg' style="width: 60% ;height: 100%; margin-left: 20%" >
+            </div>
+            <div class='control-colum'>
+                <img src='./wordle.jpg' style="width: 60% ;height: 100%; margin-left: 20%" >
             </div>
              <div class='control-colum'>
+                 <img src='./sentiment.png' style="width: 60% ;height: 100%; margin-left: 20%" >
             </div>
-             <div class='control-colum'>
-            </div>
-             <div class='control-colum'>
-            </div>
+             <!-- <div class='control-colum'>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
-import CheckInVis from './checkin-vis';
+// import CheckInVis from './checkin-vis';
 
 export default {
     name: 'DetailView',
     components: {
-        CheckInVis,
+    //    CheckInVis,
     },
     mounted() {
     },
@@ -46,7 +49,7 @@ h1
 .row
     height: 100%
 .control-colum
-    height: 24%
+    height: 32%
     width: 110%
     border-style: dashed
     border-width: 1px
