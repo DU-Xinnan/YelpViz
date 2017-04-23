@@ -9,6 +9,7 @@ class Service {
         this.rawData = undefined;
         this.checkinTime = undefined;
         this.dataWithValidImg = undefined;
+        this.businessID2Img = undefined;
         return instance;
     }
 
@@ -21,6 +22,7 @@ class Service {
         this.setData(data);
         this.setCheckInTimeData();
         this.setDataWithValidImg();
+        this.setBusinessPhotoMatch();
     }
 
     getData() {
@@ -56,6 +58,17 @@ class Service {
 
     getDataWithValidImg() {
         return this.dataWithValidImg;
+    }
+
+    setBusinessPhotoMatch() {
+        this.businessID2Img = {};
+        this.data.forEach((restaurant) => {
+            this.businessID2Img[restaurant.business_id] = restaurant.images;
+        });
+    }
+
+    getImgArrayByBusinessID(businessID) {
+        return this.businessID2Img[businessID];
     }
 
 }
