@@ -6,7 +6,7 @@
                     <v-tilelayer :url="url" :attribution="attribution" class="tilelayer"></v-tilelayer>
                     <v-marker v-for="marker in markers" :key="marker.businessID" :latLng="marker.latLng" :icon="icon" class="marker" businessID="marker.businessID" @l-click="mClickHandler(marker.businessID)"></v-marker>
                     <v-polygon :latLngs="polygon" color="#80FF66" class="polygons"></v-polygon>
-                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=0.2 :stroke="false" class="point" :fillColor="fillColor" :fillOpacity="fillOpacity" @l-click="mClickHandler(point.businessID)"></v-circle>
+                    <v-circle v-for="point in points" :key="point.businessID" :latLng="point.latLng" :radius=0.2 :stroke="whetherStroke" opacity=0 class="point" :fillColor="fillColor" :fillOpacity="fillOpacity" @l-click="mClickHandler(point.businessID)"></v-circle>
                 </v-map>
             </div>
         </div>
@@ -254,6 +254,7 @@
                 points: [],
                 fillColor: 'green',
                 fillOpacity: 0.2,
+                whetherStroke: false,
             };
         },
         methods: {

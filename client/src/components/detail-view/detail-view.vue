@@ -1,16 +1,18 @@
 <template>
     <div id="detail-view-container">
-        <h1>Detailed View</h1>
         <div class="container">
+            <h1>Checkin Time</h1>
             <div class='control-colum'>
                 <!--<check-in-vis></check-in-vis> -->
-                <img src='./radarchart.jpg' style="width: 60% ;height: 100%; margin-left: 20%" >
+                <img src='./radarchart.jpg' style="width: 60% ; margin-left: 20%; height: 90%; margin-top: 1.5%" >
             </div>
+            <h1>Review Text Wordle</h1>
             <div class='control-colum'>
-                <img src='./wordle.jpg' style="width: 60% ;height: 100%; margin-left: 20%" >
+                <img src='./wordle.png' style="width: 80% ;height: 100%; margin-left: 10%; height: 90%; margin-top: 1.5%" >
             </div>
+            <h1>Review Sentiment Analysis</h1>
              <div class='control-colum'>
-                 <img src='./sentiment.png' style="width: 60% ;height: 100%; margin-left: 20%" >
+                 <img src='./sentiment.png' style="width: 80% ;height: 100%; margin-left: 10%;  height: 90%; margin-top: 1.5%" >
             </div>
              <!-- <div class='control-colum'>
             </div> -->
@@ -49,9 +51,9 @@ h1
 .row
     height: 100%
 .control-colum
-    height: 32%
+    height: 30%
     width: 110%
-    border-style: dashed
+    border-style: solid
     border-width: 1px
     border-color: grey
 </style>
