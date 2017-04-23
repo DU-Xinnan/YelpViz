@@ -1,6 +1,6 @@
 <template>
     <div class="col-2" id="control-panel">
-        <h2>Control Panel</h2>
+        <h1 style="margin-top: 5%">Control Panel</h1>
        <div class='control-column'>
             <data-loader></data-loader>
        </div>
