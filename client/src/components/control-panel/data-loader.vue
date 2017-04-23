@@ -1,6 +1,6 @@
 <template>
     <div id="data-loader" class="control-section">
-        <h1 class="control-panel-label">Load Data: </h1>
+        <h3 class="control-panel-label">Load Data: </h3>
         <select class="custom-select skyline-select" id="data-loader-selector" v-model="selectedDataName">
             <option v-for="dataname in dataList" :value="dataname">{{dataname}}</option>
         </select>

@@ -3,7 +3,6 @@
         <h2>Control Panel</h2>
        <div class='control-column'>
             <data-loader></data-loader>
-            <attr-list :setting="setting"></attr-list>
        </div>
     </div>
 </template>
