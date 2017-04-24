@@ -39,7 +39,7 @@
             //     "TileLayer": baseLayer
             // };
             // map.panTo([47.413420, -1.219482]);
-            console.log('map', map);
+            // console.log('map', map);
             if (debug) console.log('this', this);
             if (debug) console.log('base layer', baseLayer);
 
@@ -81,7 +81,7 @@
                 const hex2 = (hexRadius / 2) * Math.sqrt(3);
                 const bounds = map.getBounds();
                 const nw = bounds.getNorthWest();
-                console.log(nw);
+                // console.log(nw);
                 const se = bounds.getSouthEast();
                 const hexWidth = (Math.abs(se.lng - nw.lng) / hexRadius / 3) + 1;
                 const hexHeight = (Math.abs(se.lat - nw.lat) / hex2) + 1;
@@ -194,7 +194,7 @@
                     });
                     if (debug) console.log('new circle', c);
                     const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
-                    console.log(popContent);
+                    // console.log(popContent);
                     c.bindPopup(popContent);
                     return 0;
                 });
@@ -280,8 +280,8 @@
             },
             appendMarkers() {
                 const vmap = d3.select('#map');
-                console.log('vmap', vmap);
-                console.log('d3', d3);
+                // console.log('vmap', vmap);
+                // console.log('d3', d3);
                 vmap.selectAll('VMarker')
                     .data(this.markers[0])
                     .append('VMarker')
