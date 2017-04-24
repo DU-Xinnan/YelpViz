@@ -34,10 +34,13 @@
         mounted() {
             // this.appendMarkers();
             const map = this.$children[0].mapObject;
+
             let heatmapLayer;
             let heatmapData;
             // const baseLayer = this.$children[0].$children[0].$tileLayer;
             if (debug) console.log('map', map);
+            const baseLayer = this.$children[0].$children[0].$tileLayer;
+
             if (debug) console.log('this', this);
 
             if (this.enableHeatmap) {
@@ -208,6 +211,7 @@
                     });
                     if (debug) console.log('new circle', c);
                     const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
+
                     if (debug) console.log(popContent);
                     c.bindPopup(popContent);
                     tempPoints.push(c);
@@ -276,8 +280,8 @@
             },
             appendMarkers() {
                 const vmap = d3.select('#map');
-                console.log('vmap', vmap);
-                console.log('d3', d3);
+                // console.log('vmap', vmap);
+                // console.log('d3', d3);
                 vmap.selectAll('VMarker')
                     .data(this.markers[0])
                     .append('VMarker')

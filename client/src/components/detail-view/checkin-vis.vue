@@ -45,7 +45,10 @@ export default {
             console.log(data);
         },
         computeMaxFlow() {
+            // the first index is maxflow in one day in all restaurants
+            // the second index if the max total flow in all days in all restaurant
             let maxFlow = 0;
+            let maxtotalFlow = 0;
             // const reg = /(?<=:)[\w+.-]+/;
             Object.keys(this.data).forEach((businessid) => {
                 const restTime = [];
@@ -58,14 +61,63 @@ export default {
                         restTimeflow.push(parseInt(time.match(/:(.*)/, '')[1], 10));
                     });
                     const restTimemax = _.max(restTimeflow);
+                    const restTimeTotalmax = _.reduce(restTimeflow, (memo, num) => memo + num, 0);
                     maxFlow = restTimemax > maxFlow ? restTimemax : maxFlow;
+                    maxtotalFlow = restTimeTotalmax > maxtotalFlow ?
+                    restTimeTotalmax : maxtotalFlow;
                 }
             });
-            return maxFlow;
+            return [maxFlow, maxtotalFlow];
         },
+        // computeRestaurantFlow(timeArr) {
+        //     // given a resaurant, compute the total flow
+        // },
+        // computeRestaurantWeekdayFlow(timeArr) {
+        //     // given a time array of a restaurant, return its own weekday flow
+
+        // },
         // // drawRestaurantView(restaurant) {
         // //     WorkingRestaurant = JSON.parse(JSON.stringify(restaurant));
         // },
+        initCheckinTime() {
+            const timedict = {};
+            timedict.Sun = [];
+            timedict.Mon = [];
+            timedict.Tue = [];
+            timedict.Wed = [];
+            timedict.Thu = [];
+            timedict.Fri = [];
+            timedict.Sat = [];
+            return timedict;
+        },
+        reStructureData() {
+            const debug = false;
+            const checkinTime = {};
+            Object.keys(this.data).forEach((businessid) => {
+                if (checkinTime[businessid] === undefined) {
+                    checkinTime[businessid] = this.initCheckinTime();
+                }
+                if (this.data[businessid] !== undefined) {
+                    this.data[businessid].forEach((time) => {
+                        if (time !== undefined) {
+                            if (debug) console.log(time);
+                            const weekday = time.match(/(.*)-/, '')[1];
+                            if (debug) console.log(weekday);
+                            const flow = parseInt(time.match(/:(.*)/, '')[1], 10);
+                            if (debug) console.log(flow);
+                            const hour = parseInt(time.match(/-(.*):/, '')[1], 10);
+                            if (debug) console.log(hour);
+                            const hourFlow = {};
+                            hourFlow[hour] = flow;
+                            if (debug) console.log(checkinTime[businessid]);
+                            checkinTime[businessid][weekday].push(hourFlow);
+                            if (debug) console.log('checkinTime');
+                        }
+                    });
+                }
+            });
+            return checkinTime;
+        },
         drawCheckInView() {
             const VERTICAL_MARGIN = 10;
             const HORIZONTAL_MARGIN = 10;
@@ -77,6 +129,8 @@ export default {
             if (!canvas.empty()) {
                 canvas.remove();
             }
+            const checkinTime = this.reStructureData();
+            console.log(checkinTime);
 
             // const svg = d3.select(el).append('svg')
             //     .attr('width', this.canvasWidth + (HORIZONTAL_MARGIN * 2))
@@ -96,10 +150,14 @@ export default {
             // const self = this;
             // const degree = 360 / 24;
 
-            const maxFlow = this.computeMaxFlow();
+            const maxFlow = this.computeMaxFlow()[0];
             // console.log(clockRadius);
             console.log(maxFlow);
             // const flowScale = d3.linearScale()
+            const flowScale = d3.scaleLinear()
+                .domain([1, maxFlow])
+                .range([1, maxFlow]);
+            console.log(flowScale);
         },
     },
 };
