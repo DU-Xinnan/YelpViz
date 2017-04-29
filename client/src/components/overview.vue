@@ -66,7 +66,8 @@
                 return 0;
             });
 
-            PipeService.$on(PipeService.DATA_CHANGE, () => {
+            PipeService.$on(PipeService.DATA_CHANGE, (newValue) => {
+                this.city = newValue;
                 const tmp = DataService.getDataWithValidImg();
                 this.points = [];
                 console.log('refresh grid', 11);
@@ -84,7 +85,10 @@
 
             // Pipeservices
             PipeService.$on(PipeService.CLICK_POINT, (id) => {
-                console.log('id', id);
+                // console.log('id', id);
+                const restaurantURL = this.getResaurantUrl(id);
+                console.log(restaurantURL);
+                window.open(restaurantURL, '_blank');
             });
         },
         data() {
@@ -125,11 +129,26 @@
                 hexagon: [],
                 bounds: undefined,
                 zoomFlag: false,
+                city: undefined,
             };
         },
         methods: {
             foo() {
                 console.log('foo called');
+            },
+            processName(name) {
+                let result = name.toLowerCase().split(' ').filter(item => item !== ' ');
+                result = result.join('-');
+                result = result.replace('&', 'and').replace('\'', '').replace(',', '').replace('.', '');
+                return result;
+            },
+            getResaurantUrl(id) {
+                const index = DataService.id2index[id];
+                const restaurant = DataService.data[index];
+                const name = this.processName(restaurant.name);
+                const cityName = this.processName(this.city);
+                const URL = `https://en.yelp.com.hk/biz_photos/${[name, cityName].join('-')}?tab=food`;
+                return URL;
             },
             mClickHandler(id) {
                 PipeService.$emit(PipeService.CLICK_POINT, id);
@@ -141,7 +160,7 @@
                     // .domain([-0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8])
                     .domain(domain)
                     .range(colors);
-                return colorScale(number);
+                return colorScale(number - 0.5);
             },
             appendMarkers() {
                 const vmap = d3.select('#map');
@@ -158,12 +177,6 @@
                 const map = event.target;
                 const level = map.getZoom();
                 this.refreshGrid(map, level, this.bounds);
-            },
-            getcolor(point) {
-                if (point === 'null') {
-                    return 'green';
-                }
-                return 'green';
             },
             refreshGrid(map, level, bounds) {
                 if (this.zoomFlag) return;

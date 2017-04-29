@@ -10,6 +10,7 @@ class Service {
         this.checkinTime = undefined;
         this.dataWithValidImg = undefined;
         this.businessID2Img = undefined;
+        this.id2index = undefined;
         return instance;
     }
 
@@ -23,6 +24,7 @@ class Service {
         this.setCheckInTimeData();
         this.setDataWithValidImg();
         this.setBusinessPhotoMatch();
+        this.setIdToIndex();
     }
 
     getData() {
@@ -71,6 +73,14 @@ class Service {
         return this.businessID2Img[businessID];
     }
 
+    setIdToIndex() {
+        let count = 0;
+        this.id2index = {};
+        this.data.forEach((restaurant) => {
+            this.id2index[restaurant.business_id] = count;
+            count += 1;
+        });
+    }
 }
 
 const DataService = new Service();
