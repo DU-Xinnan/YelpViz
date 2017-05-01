@@ -354,10 +354,9 @@
 @import "~leaflet/dist/leaflet.css";
 #overview
     width: 100%
-    border-style: solid;
-    border-width: 1px;
 #map-area
     height: 100%
     padding-left: 15px
     display: inline-block
+    width: 100%
 </style>

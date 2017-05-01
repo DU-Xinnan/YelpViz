@@ -1,5 +1,5 @@
 <template>
-    <div id="detail-view-container">
+    <div id="detail-view-container" style="background-color: #343332;">
         <div class="container">
             <h1>Checkin Time</h1>
             <div class='control-colum'>

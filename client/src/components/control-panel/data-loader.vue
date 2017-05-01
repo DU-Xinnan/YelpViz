@@ -33,6 +33,7 @@ export default {
             NetService.getData(newValue, (response) => {
                 const Data = response.data;
                 DataService.setRawData(Data);
+                DataService.setCity(newValue);
                 PipeService.$emit(PipeService.DATA_CHANGE, newValue);
             });
         },
@@ -49,4 +50,6 @@ export default {
     height: 24px
     font-size: 1em
     padding-top: 1px
+h3
+    color: #D3D3D3
 </style>

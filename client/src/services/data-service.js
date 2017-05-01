@@ -11,6 +11,7 @@ class Service {
         this.dataWithValidImg = undefined;
         this.businessID2Img = undefined;
         this.id2index = undefined;
+        this.city = undefined;
         return instance;
     }
 
@@ -18,6 +19,12 @@ class Service {
         this.data = data;
     }
 
+    setCity(city) {
+        this.city = city;
+    }
+    getCity() {
+        return this.city;
+    }
     setRawData(data) {
         this.rawData = data;
         this.setData(data);
@@ -56,6 +63,7 @@ class Service {
                 this.dataWithValidImg.push(restaurant);
             }
         });
+        this.data = this.dataWithValidImg;
     }
 
     getDataWithValidImg() {
