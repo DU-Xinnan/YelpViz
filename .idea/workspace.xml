@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c197b77c-0cbf-4e55-b53c-fb38ee0105fc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue" afterPath="$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue" afterPath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue" afterPath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/Cleveland_food.json" afterPath="$PROJECT_DIR$/data/Cleveland_food.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/Madison_food.json" afterPath="$PROJECT_DIR$/data/Madison_food.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_processing/frequency/Cleveland_food.json" afterPath="$PROJECT_DIR$/data_processing/frequency/Cleveland_food.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_processing/frequency/Madison_food.json" afterPath="$PROJECT_DIR$/data_processing/frequency/Madison_food.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_processing/frequency/frequency.py" afterPath="$PROJECT_DIR$/data_processing/frequency/frequency.py" />
     </list>
     <ignored path="Yelp_4901F.iws" />
@@ -33,8 +26,8 @@
       <file leaf-file-name="word-cloud.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+            <state relative-caret-position="220">
+              <caret line="48" column="38" lean-forward="false" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
               <folding>
                 <element signature="e#81#108#0" expanded="true" />
               </folding>
@@ -42,11 +35,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="word-cloud_v0.0.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="44" column="43" lean-forward="true" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Cleveland_complete.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/Cleveland_complete.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-869">
-              <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+            <state relative-caret-position="174">
+              <caret line="39" column="15" lean-forward="false" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -55,8 +58,8 @@
       <file leaf-file-name="overview.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/components/overview.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="959">
-              <caret line="70" column="62" lean-forward="true" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+            <state relative-caret-position="172">
+              <caret line="145" column="51" lean-forward="false" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="51" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#753#777#0" expanded="true" />
@@ -135,23 +138,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data-loader.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/control-panel/data-loader.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-              <folding>
-                <element signature="e#366#418#0" expanded="true" />
-                <marker date="1493793096000" expanded="true" signature="545:1336" ph="{&quot;name&quot;: 'DataLoader'...}" />
-                <marker date="1493793096000" expanded="true" signature="815:1336" ph="{...}" />
-                <marker date="1493793096000" expanded="true" signature="852:1336" ph="{...}" />
-                <marker date="1493793096000" expanded="true" signature="1228:1336" ph="{...}" />
-                <marker date="1493793096000" expanded="true" signature="1657:1665" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -163,8 +149,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>function</find>
-      <find>mounted</find>
       <find>tmp</find>
       <find>drawcheckin</find>
       <find>DataService.getDataWithValidImg();</find>
@@ -193,6 +177,8 @@
       <find>getResaurantUrl</find>
       <find>data</find>
       <find>dataser</find>
+      <find>filter</find>
+      <find>[</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -234,7 +220,7 @@
     <handled-path value="$PROJECT_DIR$/client/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="46" />
+    <option name="x" value="41" />
     <option name="y" value="23" />
     <option name="width" value="1248" />
     <option name="height" value="777" />
@@ -399,6 +385,54 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Yelp_4901F" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Yelp_4901F" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Yelp_4901F" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Yelp_4901F" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="detail-view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -511,15 +545,15 @@
       <workItem from="1492911062232" duration="2400000" />
       <workItem from="1492936711192" duration="836000" />
       <workItem from="1493536991558" duration="4719000" />
-      <workItem from="1493611994933" duration="41145000" />
+      <workItem from="1493611994933" duration="45187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49100000" />
+    <option name="totallyTimeSpent" value="53142000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="46" y="23" width="1248" height="777" extended-state="6" />
+    <frame x="41" y="23" width="1248" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23963515" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -918,14 +952,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="62" column="47" lean-forward="true" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -960,10 +986,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/Cleveland_Full.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2308">
+          <caret line="44" column="15" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/overview.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="959">
-          <caret line="70" column="62" lean-forward="true" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+        <state relative-caret-position="172">
+          <caret line="145" column="51" lean-forward="false" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="51" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#753#777#0" expanded="true" />
@@ -973,26 +1007,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/Cleveland_Full.json">
+    <entry file="file://$PROJECT_DIR$/data/Cleveland_complete.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2308">
-          <caret line="44" column="15" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="15" />
+        <state relative-caret-position="174">
+          <caret line="39" column="15" lean-forward="false" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/Cleveland_complete.json">
+    <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-869">
-          <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+        <state relative-caret-position="221">
+          <caret line="44" column="43" lean-forward="true" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+        <state relative-caret-position="220">
+          <caret line="48" column="38" lean-forward="false" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
           <folding>
             <element signature="e#81#108#0" expanded="true" />
           </folding>

@@ -166,19 +166,21 @@ def main():
     city_out = ["Madison_restFood.json", "Madison_restFood.json"]
     
     for i in range(len(city_in)):
-        most_frequent = []
-        _food = set()
-        count = 0
         data = open_json(city_in[i])
-        for entry in data:
-            for key in entry:
+        ret_dict = []
+        for entry in data:  # each entry is a restaurant
+            most_frequent = []
+            _food = set()
+            count = 0
+            for key in entry: # each key its id
                 for _key, _value in entry[key].items():
-                    if _value > 80 and _key in FOOD and _key not in _food:
+                    if _key in FOOD and _key not in _food:
                         _food.add(_key)
                         count += 1
                         most_frequent.append({"name": _key, "value": _value})
-        dump_json(city_out[i], most_frequent)
-        print(count)
+            print(count)
+            ret_dict.append({ key: most_frequent })
+        dump_json(city_out[i], ret_dict)
 
 
 if __name__ == "__main__":
