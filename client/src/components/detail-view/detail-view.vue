@@ -8,7 +8,7 @@
             </div>
             <h1>Review Text Wordle</h1>
             <div class='control-colum'>
-                <img src='./wordle.png' style="width: 80% ;height: 100%; margin-left: 10%; height: 90%; margin-top: 1.5%" >
+                <WordCloud style="width: 80% ;height: 100%; margin-left: 10%;  height: 90%; margin-top: 1.5%"></WordCloud>
             </div>
             <h1>Review Sentiment Analysis</h1>
              <div class='control-colum'>
@@ -22,11 +22,13 @@
 
 <script>
 import CheckInVis from './checkin-vis';
+import WordCloud from './word-cloud';
 
 export default {
     name: 'DetailView',
     components: {
         CheckInVis,
+        WordCloud,
     },
     mounted() {
     },

@@ -11,11 +11,20 @@ class Service {
         this.dataWithValidImg = undefined;
         this.businessID2Img = undefined;
         this.id2index = undefined;
+        this.cloudData = undefined;
         return instance;
     }
 
     setData(data) {
         this.data = data;
+    }
+
+    setCloudData(data) {
+        this.cloudData = data;
+    }
+
+    getCloudData() {
+        return this.cloudData;
     }
 
     setRawData(data) {
