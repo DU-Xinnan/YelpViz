@@ -30,6 +30,11 @@ export default {
             // NetService.getDistributionData((response) => {
             //     DataService.setDistributionData(response.data);
             // });
+            NetService.getCloudData(newValue, (response) => {
+                const Data = response.data;
+                DataService.setCloudData(Data);
+            });
+
             NetService.getData(newValue, (response) => {
                 const Data = response.data;
                 DataService.setRawData(Data);

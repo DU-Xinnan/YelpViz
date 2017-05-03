@@ -12,6 +12,7 @@ class Service {
         this.businessID2Img = undefined;
         this.id2index = undefined;
         this.city = undefined;
+        this.cloudData = undefined;
         return instance;
     }
 
@@ -24,6 +25,13 @@ class Service {
     }
     getCity() {
         return this.city;
+    }
+    setCloudData(data) {
+        this.cloudData = data;
+    }
+
+    getCloudData() {
+        return this.cloudData;
     }
     setRawData(data) {
         this.rawData = data;
