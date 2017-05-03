@@ -15,9 +15,14 @@
                 const data = DataService.getCloudData();
                 this.data = data;
                 console.log(data);
-                // console.log(`images: ${this.data}`);
                 // TODO: map function to change data
                 this.onStart();
+            });
+
+            PipeService.$on(PipeService.CLICK_POINT, (id) => {
+                console.log('id', id);
+//                const words = this.getRestWordsById(id);
+//                console.log(words);
             });
         },
         data() {
@@ -26,8 +31,18 @@
             };
         },
         methods: {
+            add_color(entry) {
+                const tmp = entry;
+                tmp.textStyle = {};
+                tmp.textStyle.normal = {};
+                tmp.textStyle.normal.color = `rgb(${Math.round(Math.random() * 160)}, ${Math.round(Math.random() * 160)}, ${Math.round(Math.random() * 160)})`;
+            },
+
             onStart() {
                 const chart = echarts.init(this.$refs.cloud);
+
+                this.data.forEach(this.add_color);
+                console.log(this.data);
 
                 chart.setOption({
                     series: [

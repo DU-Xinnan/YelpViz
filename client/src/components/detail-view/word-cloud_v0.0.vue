@@ -42,32 +42,27 @@
                     // .rotate(function() { return ~~(Math.random() * 2) * 90; })
                     .font('Impact')
                     .fontSize(d => d.size)
-                    .on('end', this.drawCloud());
+                    .on('end', (words) => {
+                        const fill = d3.scaleOrdinal(d3.schemeCategory20);
+                        console.log('words: ');
+                        console.log(words);
+                        console.log(`normal size: ${10 + (Math.random() * 30)}`);
+                        d3.selectAll('#word-cloud').append('svg')
+                            .attr('width', 150)
+                            .attr('height', 150)
+                            .append('g')
+                            .attr('transform', 'translate(300, 300)')
+                            .selectAll('text')
+                            .data(words)
+                            .enter()
+                            .append('text')
+                            .style('font-size', d => `${d.size}px`)
+                            .style('font-family', 'Impact')
+                            .style('fill', (d, i) => fill(i))
+                            .attr('text-anchor', 'middle')
+                            .text(d => d.text);
+                    });
                 layout.start();
-            },
-            drawCloud() {
-                const words = [{ font: 'Impact', hasText: true, height: 190, padding: 0, rotate: 0, size: 95, style: 'normal', text: 'than', weight: 'normal', width: 256, x: -22, x0: -128, x1: 128, xoff: 352, y: -18, y0: -77, y1: 94, yoff: 0 }];
-                const fill = d3.scaleOrdinal(d3.schemeCategory20);
-                console.log('words: ');
-                console.log(words);
-                console.log(`normal size: ${10 + (Math.random() * 90)}`);
-                d3.selectAll('#word-cloud').append('svg')
-                    .attr('width', 150)
-                    .attr('height', 150)
-                    .append('g')
-                    .attr('transform', 'translate(300, 300)')
-                    .selectAll('text')
-                    .data(words)
-                    .enter()
-                    .append('text')
-                    .style('font-size', d => `${d.size}px`)
-                    .style('font-family', 'Impact')
-                    .style('fill', (d, i) => fill(i))
-                    .attr('text-anchor', 'middle')
-//                    .attr('transform', function(d) {
-//                        return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')';
-//                    })
-                    .text(d => d.text);
             },
         },
     };

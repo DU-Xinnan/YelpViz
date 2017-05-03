@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c197b77c-0cbf-4e55-b53c-fb38ee0105fc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/package.json" afterPath="$PROJECT_DIR$/client/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/control-panel/data-loader.vue" afterPath="$PROJECT_DIR$/client/src/components/control-panel/data-loader.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue" afterPath="$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/services/data-service.js" afterPath="$PROJECT_DIR$/client/src/services/data-service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/services/net-service.js" afterPath="$PROJECT_DIR$/client/src/services/net-service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/Cleveland.py" afterPath="$PROJECT_DIR$/server/models/Cleveland.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/Madison.py" afterPath="$PROJECT_DIR$/server/models/Madison.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/index.py" afterPath="$PROJECT_DIR$/server/routes/index.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue" afterPath="$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue" afterPath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue" afterPath="$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/Cleveland_food.json" afterPath="$PROJECT_DIR$/data/Cleveland_food.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/Madison_food.json" afterPath="$PROJECT_DIR$/data/Madison_food.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_processing/frequency/Cleveland_food.json" afterPath="$PROJECT_DIR$/data_processing/frequency/Cleveland_food.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_processing/frequency/Madison_food.json" afterPath="$PROJECT_DIR$/data_processing/frequency/Madison_food.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data_processing/frequency/frequency.py" afterPath="$PROJECT_DIR$/data_processing/frequency/frequency.py" />
     </list>
     <ignored path="Yelp_4901F.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,28 +30,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="detail-view.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue">
+      <file leaf-file-name="word-cloud.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+            <state relative-caret-position="240">
+              <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
               <folding>
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#WordCloud#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#891#930#0" expanded="true" />
+                <element signature="e#81#108#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="word-cloud.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue">
+      <file leaf-file-name="Cleveland_complete.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/Cleveland_complete.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+            <state relative-caret-position="-869">
+              <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="overview.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/overview.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="959">
+              <caret line="70" column="62" lean-forward="true" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
               <folding>
-                <element signature="e#81#108#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#753#777#0" expanded="true" />
+                <marker date="1493793083000" expanded="true" signature="4092:4098" ph="©" />
+                <marker date="1493793083000" expanded="true" signature="29669:29697" ph="..." />
               </folding>
             </state>
           </provider>
@@ -59,11 +70,23 @@
       <file leaf-file-name="data-service.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/services/data-service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="181">
+              <caret line="44" column="15" lean-forward="true" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
               <folding>
-                <marker date="1493790946000" expanded="true" signature="56:233" ph="{...}" />
-                <marker date="1493790946000" expanded="true" signature="56:276" ph="{...}" />
+                <marker date="1493793207000" expanded="true" signature="56:233" ph="{...}" />
+                <marker date="1493793207000" expanded="true" signature="56:276" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="restaurant-list.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="58" lean-forward="true" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/server/models/Cleveland.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+              <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -93,27 +116,7 @@
         <entry file="file://$PROJECT_DIR$/server/models/utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/routes/index.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -125,8 +128,8 @@
             <state relative-caret-position="353">
               <caret line="46" column="17" lean-forward="false" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
               <folding>
-                <marker date="1493790800000" expanded="true" signature="367:389" ph="{...}" />
-                <marker date="1493790800000" expanded="true" signature="533:550" ph="{...}" />
+                <marker date="1493793096000" expanded="true" signature="367:389" ph="{...}" />
+                <marker date="1493793096000" expanded="true" signature="533:550" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -136,9 +139,14 @@
         <entry file="file://$PROJECT_DIR$/client/src/components/control-panel/data-loader.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="22">
-              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+              <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
               <folding>
                 <element signature="e#366#418#0" expanded="true" />
+                <marker date="1493793096000" expanded="true" signature="545:1336" ph="{&quot;name&quot;: 'DataLoader'...}" />
+                <marker date="1493793096000" expanded="true" signature="815:1336" ph="{...}" />
+                <marker date="1493793096000" expanded="true" signature="852:1336" ph="{...}" />
+                <marker date="1493793096000" expanded="true" signature="1228:1336" ph="{...}" />
+                <marker date="1493793096000" expanded="true" signature="1657:1665" ph="..." />
               </folding>
             </state>
           </provider>
@@ -155,11 +163,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>foo</find>
-      <find>longi</find>
       <find>function</find>
       <find>mounted</find>
-      <find>data</find>
       <find>tmp</find>
       <find>drawcheckin</find>
       <find>DataService.getDataWithValidImg();</find>
@@ -180,11 +185,14 @@
       <find>et_data</find>
       <find>set_data</find>
       <find>getdat</find>
-      <find>Cleveland</find>
       <find>getdata</find>
       <find>series</find>
       <find>setrawdata</find>
       <find>class_name</find>
+      <find>Cleveland</find>
+      <find>getResaurantUrl</find>
+      <find>data</find>
+      <find>dataser</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -203,13 +211,15 @@
         <option value="$PROJECT_DIR$/client/src/components/word-cloud.vue" />
         <option value="$PROJECT_DIR$/client/src/app.vue" />
         <option value="$PROJECT_DIR$/client/src/components/overview.vue" />
-        <option value="$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue" />
         <option value="$PROJECT_DIR$/server/models/Cleveland.py" />
         <option value="$PROJECT_DIR$/server/models/Madison.py" />
         <option value="$PROJECT_DIR$/server/routes/index.py" />
         <option value="$PROJECT_DIR$/client/src/services/net-service.js" />
         <option value="$PROJECT_DIR$/client/src/components/control-panel/data-loader.vue" />
         <option value="$PROJECT_DIR$/client/src/services/data-service.js" />
+        <option value="$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue" />
+        <option value="$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue" />
+        <option value="$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue" />
         <option value="$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue" />
       </list>
     </option>
@@ -224,9 +234,9 @@
     <handled-path value="$PROJECT_DIR$/client/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="32" />
+    <option name="x" value="46" />
     <option name="y" value="23" />
-    <option name="width" value="1238" />
+    <option name="width" value="1248" />
     <option name="height" value="777" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -389,102 +399,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="detail-view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Yelp_4901F" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="control-panel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -597,18 +511,18 @@
       <workItem from="1492911062232" duration="2400000" />
       <workItem from="1492936711192" duration="836000" />
       <workItem from="1493536991558" duration="4719000" />
-      <workItem from="1493611994933" duration="34270000" />
+      <workItem from="1493611994933" duration="41145000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42225000" />
+    <option name="totallyTimeSpent" value="49100000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="32" y="23" width="1238" height="777" extended-state="6" />
+    <frame x="46" y="23" width="1248" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2416388" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23963515" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11532847" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -676,8 +590,8 @@
         <state relative-caret-position="345">
           <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
           <folding>
-            <marker date="1493790946000" expanded="true" signature="56:233" ph="{...}" />
-            <marker date="1493790946000" expanded="true" signature="56:276" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:233" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:276" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -686,10 +600,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="54" lean-forward="false" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#656#702#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -716,8 +627,8 @@
         <state relative-caret-position="315">
           <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding>
-            <marker date="1493790946000" expanded="true" signature="56:233" ph="{...}" />
-            <marker date="1493790946000" expanded="true" signature="56:276" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:233" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:276" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -727,8 +638,8 @@
         <state relative-caret-position="105">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <marker date="1493790800000" expanded="true" signature="367:389" ph="{...}" />
-            <marker date="1493790800000" expanded="true" signature="533:550" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="367:389" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="533:550" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -737,10 +648,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#656#702#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -751,8 +659,8 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#753#777#0" expanded="true" />
-            <marker date="1493536562000" expanded="true" signature="4092:4098" ph="©" />
-            <marker date="1493536562000" expanded="true" signature="29669:29697" ph="..." />
+            <marker date="1493793083000" expanded="true" signature="4092:4098" ph="©" />
+            <marker date="1493793083000" expanded="true" signature="29669:29697" ph="..." />
           </folding>
         </state>
       </provider>
@@ -774,8 +682,8 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#753#777#0" expanded="true" />
-            <marker date="1493536562000" expanded="true" signature="4092:4098" ph="©" />
-            <marker date="1493536562000" expanded="true" signature="29669:29697" ph="..." />
+            <marker date="1493793083000" expanded="true" signature="4092:4098" ph="©" />
+            <marker date="1493793083000" expanded="true" signature="29669:29697" ph="..." />
           </folding>
         </state>
       </provider>
@@ -785,8 +693,8 @@
         <state relative-caret-position="315">
           <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding>
-            <marker date="1493790946000" expanded="true" signature="56:233" ph="{...}" />
-            <marker date="1493790946000" expanded="true" signature="56:276" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:233" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:276" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -795,10 +703,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#656#702#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -807,8 +712,8 @@
         <state relative-caret-position="255">
           <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
           <folding>
-            <marker date="1493790800000" expanded="true" signature="367:389" ph="{...}" />
-            <marker date="1493790800000" expanded="true" signature="533:550" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="367:389" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="533:550" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -881,14 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/Cleveland_Full.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="99186" column="15" lean-forward="false" selection-start-line="99186" selection-start-column="15" selection-end-line="99186" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../testing/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -913,54 +810,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/Cleveland_complete.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="1026" column="21" lean-forward="false" selection-start-line="1026" selection-start-column="21" selection-end-line="1026" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/checkin-vis.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1905">
           <caret line="131" column="35" lean-forward="false" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
           <folding>
             <marker date="1493473837000" expanded="true" signature="6195:6205" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/overview.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2067">
-          <caret line="207" column="88" lean-forward="false" selection-start-line="207" selection-start-column="87" selection-end-line="207" selection-end-column="88" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#753#777#0" expanded="true" />
-            <marker date="1493536562000" expanded="true" signature="4092:4098" ph="©" />
-            <marker date="1493536562000" expanded="true" signature="29669:29697" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#WordCloud#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#891#930#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1000,15 +855,7 @@
     <entry file="file://$PROJECT_DIR$/server/routes/index.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
-          <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/models/Cleveland.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <caret line="27" column="29" lean-forward="false" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1016,7 +863,7 @@
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1024,9 +871,14 @@
     <entry file="file://$PROJECT_DIR$/client/src/components/control-panel/data-loader.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
-          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
           <folding>
             <element signature="e#366#418#0" expanded="true" />
+            <marker date="1493793096000" expanded="true" signature="545:1336" ph="{&quot;name&quot;: 'DataLoader'...}" />
+            <marker date="1493793096000" expanded="true" signature="815:1336" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="852:1336" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="1228:1336" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="1657:1665" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1036,19 +888,8 @@
         <state relative-caret-position="353">
           <caret line="46" column="17" lean-forward="false" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
           <folding>
-            <marker date="1493790800000" expanded="true" signature="367:389" ph="{...}" />
-            <marker date="1493790800000" expanded="true" signature="533:550" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/services/data-service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <marker date="1493790946000" expanded="true" signature="56:233" ph="{...}" />
-            <marker date="1493790946000" expanded="true" signature="56:276" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="367:389" ph="{...}" />
+            <marker date="1493793096000" expanded="true" signature="533:550" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1056,7 +897,7 @@
     <entry file="file://$PROJECT_DIR$/server/models/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1069,10 +910,89 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/models/Cleveland.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud_v0.0.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="62" column="47" lean-forward="true" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/control-panel/restaurant-list.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="58" lean-forward="true" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/detail-view.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="35" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#WordCloud#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <marker date="1493806135000" expanded="true" signature="46:902" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/services/data-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="44" column="15" lean-forward="true" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
+          <folding>
+            <marker date="1493793207000" expanded="true" signature="56:233" ph="{...}" />
+            <marker date="1493793207000" expanded="true" signature="56:276" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/overview.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="959">
+          <caret line="70" column="62" lean-forward="true" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#753#777#0" expanded="true" />
+            <marker date="1493793083000" expanded="true" signature="4092:4098" ph="©" />
+            <marker date="1493793083000" expanded="true" signature="29669:29697" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/Cleveland_Full.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2308">
+          <caret line="44" column="15" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/Cleveland_complete.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-869">
+          <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/detail-view/word-cloud.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        <state relative-caret-position="240">
+          <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
           <folding>
             <element signature="e#81#108#0" expanded="true" />
           </folding>

@@ -3,7 +3,7 @@
     <div class="card">
         <div class="row">
             <div class="col-md-4">
-                <img :src = "`../images/${this.city}/${this.restaurant.images[0].image}`">
+                <!--<img :src = "`../images/${this.city}/${this.restaurant.images[0].image}`">-->
             </div>
             <div class="col-md-8">
                 <div class="row res_row">
