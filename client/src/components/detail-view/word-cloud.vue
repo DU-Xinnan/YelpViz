@@ -15,14 +15,16 @@
                 const data = DataService.getCloudData();
                 this.data = data;
                 console.log(data);
+                // console.log(`images: ${this.data}`);
                 // TODO: map function to change data
-                this.onStart();
+                this.drawCloud(this.data);
             });
 
             PipeService.$on(PipeService.CLICK_POINT, (id) => {
                 console.log('id', id);
-//                const words = this.getRestWordsById(id);
-//                console.log(words);
+                const words = this.getRestWordsById(id);
+                console.log(words);
+                this.drawCloud(words);
             });
         },
         data() {
@@ -31,6 +33,30 @@
             };
         },
         methods: {
+            getRestWordsById(id) {
+                const rests = DataService.getData();
+                const restWords = {};
+                const existingTags = new Set();
+                const ret = [];
+                const restaurant = rests.filter(rest => rest.business_id === id)[0];
+                console.log(restaurant.images);
+                restaurant.images.forEach((m) => {
+                    m.lables.forEach((v) => {
+                        if (existingTags.has(v.description)) {
+                            restWords[v.description] += v.score;
+                        } else {
+                            existingTags.add(v.description);
+                            restWords[v.description] = v.score;
+                        }
+                    });
+                    // restWords.push(...m.lables);
+                });
+                Object.keys(restWords).forEach((k, v) => {
+                    ret.push({ name: k, value: v });
+                });
+                return ret;
+            },
+
             add_color(entry) {
                 const tmp = entry;
                 tmp.textStyle = {};
@@ -38,11 +64,11 @@
                 tmp.textStyle.normal.color = `rgb(${Math.round(Math.random() * 160)}, ${Math.round(Math.random() * 160)}, ${Math.round(Math.random() * 160)})`;
             },
 
-            onStart() {
+            drawCloud(words) {
                 const chart = echarts.init(this.$refs.cloud);
 
-                this.data.forEach(this.add_color);
-                console.log(this.data);
+                words.forEach(this.add_color);
+                console.log(words);
 
                 chart.setOption({
                     series: [
@@ -71,7 +97,7 @@
                                     shadowColor: '#333',
                                 },
                             },
-                            data: this.data,
+                            data: words,
                         }],
                 });
             },
