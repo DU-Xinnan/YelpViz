@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <navbar></navbar>
-        <div class="row" :style="{height: (setting.height ) + 'px', width: setting.width + 'px'}" style="position: absolute;">
+        <div class="row" :style="{height: (setting.height ) + 'px', width: setting.width + 'px'}" style="position: absolute; background-color: #343332">
             <control-panel :setting="setting" class="col-2"></control-panel>
             <div class="col-7">
                 <div class="row" style="height: 100%">
@@ -65,4 +65,5 @@ export default {
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
     font-size: 0.875em
+    
 </style>

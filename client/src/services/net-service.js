@@ -35,7 +35,14 @@ function getData(name, callback) {
     request(url, params, GET_REQUEST, callback);
 }
 
+function getCloudData(name, callback) {
+    const url = `${devApiUrl}/cloudData/${name}`;
+    const params = {};
+    request(url, params, GET_REQUEST, callback);
+}
+
 export default {
     getDataList,
     getData,
+    getCloudData,
 };

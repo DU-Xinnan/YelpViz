@@ -10,6 +10,9 @@ class Service {
         this.checkinTime = undefined;
         this.dataWithValidImg = undefined;
         this.businessID2Img = undefined;
+        this.id2index = undefined;
+        this.city = undefined;
+        this.cloudData = undefined;
         return instance;
     }
 
@@ -17,12 +20,26 @@ class Service {
         this.data = data;
     }
 
+    setCity(city) {
+        this.city = city;
+    }
+    getCity() {
+        return this.city;
+    }
+    setCloudData(data) {
+        this.cloudData = data;
+    }
+
+    getCloudData() {
+        return this.cloudData;
+    }
     setRawData(data) {
         this.rawData = data;
         this.setData(data);
         this.setCheckInTimeData();
         this.setDataWithValidImg();
         this.setBusinessPhotoMatch();
+        this.setIdToIndex();
     }
 
     getData() {
@@ -54,6 +71,7 @@ class Service {
                 this.dataWithValidImg.push(restaurant);
             }
         });
+        this.data = this.dataWithValidImg;
     }
 
     getDataWithValidImg() {
@@ -71,6 +89,14 @@ class Service {
         return this.businessID2Img[businessID];
     }
 
+    setIdToIndex() {
+        let count = 0;
+        this.id2index = {};
+        this.data.forEach((restaurant) => {
+            this.id2index[restaurant.business_id] = count;
+            count += 1;
+        });
+    }
 }
 
 const DataService = new Service();

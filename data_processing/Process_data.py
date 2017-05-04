@@ -30,7 +30,25 @@ def merge_checkin(city):
     writeFile = open(city + "_with_checkin.json", 'w')
     strData = json.dumps(cityData, indent=4)
     writeFile.write(strData)
-    
+
+def merge_lable(city):
+    unrelated = ["food", "dish", "cuisine", "side dish", "produce", "breakfast", "restaurant", "lunch", "dinner"]
+    fullFile = open('../data/'+city+'_Full.json', 'r')
+    fullData = json.loads(fullFile.read())
+    lablesFile = open('../data/'+city+'_lables.json', 'r')
+    lablesData = json.loads(lablesFile.read())
+    for restaurant in fullData:
+        for image in restaurant["images"]:
+            try:
+                lables = [x for x in lablesData[image["image"]] if x["description"] not in unrelated]
+                image["lables"] = lables
+            except:
+                image["lables"] = []
+                print image["image"]
+    writeFile = open(city+'_complete.json', 'w')
+    writeFile.write(json.dumps(fullData, indent=4))
+
+
 
 def process_checkin(city):
     checkinData = json.loads(open("checkin/"+city+"_checkin.json", 'r').read())
@@ -68,4 +86,4 @@ def process_restaurant(city):
     writeFile.close()
 if __name__ == "__main__":
     #process_prediction("Cleveland")
-    merge_checkin("Madision")
+    merge_lable("Cleveland")

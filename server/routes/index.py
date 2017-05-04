@@ -22,3 +22,9 @@ def get_data_list():
 def get_data(dataname):
     instance = get_class_instance(dataname)
     return instance.get_data()
+
+
+@app.route('/api/cloudData/<dataname>')
+def get_cloud_data(dataname):
+    instance = get_class_instance(dataname)
+    return instance.get_cloud()

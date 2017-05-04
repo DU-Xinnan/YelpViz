@@ -30,13 +30,16 @@ export default {
             // NetService.getDistributionData((response) => {
             //     DataService.setDistributionData(response.data);
             // });
+            NetService.getCloudData(newValue, (response) => {
+                const Data = response.data;
+                DataService.setCloudData(Data);
+            });
+
             NetService.getData(newValue, (response) => {
                 const Data = response.data;
                 DataService.setRawData(Data);
-                // DataService.genFullAttributeTable(Data.attributeTable);
-                // DataService.computeRealDistribution(Data.pointTable, Data.attributeTable);
-                // DataService.computeDistribution();
-                PipeService.$emit(PipeService.DATA_CHANGE);
+                DataService.setCity(newValue);
+                PipeService.$emit(PipeService.DATA_CHANGE, newValue);
             });
         },
     },
@@ -52,4 +55,6 @@ export default {
     height: 24px
     font-size: 1em
     padding-top: 1px
+h3
+    color: #D3D3D3
 </style>
