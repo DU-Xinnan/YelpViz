@@ -34,6 +34,7 @@ export default {
                     Fri: 5,
                     Sat: 6,
                 },
+                clockRadius: 120,
             },
         };
     },
@@ -132,27 +133,30 @@ export default {
             const checkinTime = this.reStructureData();
             console.log(checkinTime);
 
-            // const svg = d3.select(el).append('svg')
-            //     .attr('width', this.canvasWidth + (HORIZONTAL_MARGIN * 2))
-            //     .attr('height', this.canvasHeight +
-            //         (VERTICAL_MARGIN * 2))
-            //     .append('g')
-            //     .attr('transform', `translate(${HORIZONTAL_MARGIN}, ${VERTICAL_MARGIN})`);
+            const svg = d3.select(el).append('svg')
+                .attr('width', this.canvasWidth + (HORIZONTAL_MARGIN * 2))
+                .attr('height', this.canvasHeight +
+                    (VERTICAL_MARGIN * 2))
+                .append('g')
+                .attr('transform', `translate(${HORIZONTAL_MARGIN}, ${VERTICAL_MARGIN})`);
 
-            // const tip = d3.tip().attr('class', 'd3-tip').html((nd) => {
-            //     if (nd.name !== undefined) {
-            //         str = `<div class="d3-tip">name: ${nd.name}`;
-            //     return str;
-            // })
-            // .offset([-40, 0]);
+            const tip = d3.tip().attr('class', 'd3-tip').html((nd) => {
+                if (nd.name !== undefined) {
+                    const str = `<div class="d3-tip">name: ${nd.name}`;
+                    return str;
+                }
+                return `<div class="d3-tip">id: ${nd.business_id}`;
+            })
+            .offset([-40, 0]);
 
-            // svg.call(tip);
+            svg.call(tip);
             // const self = this;
             // const degree = 360 / 24;
 
             const maxFlow = this.computeMaxFlow()[0];
+            const maxTotalFlow = this.computeMaxFlow()[1];
             // console.log(clockRadius);
-            console.log(maxFlow);
+            console.log(maxFlow, maxTotalFlow);
             // const flowScale = d3.linearScale()
             const flowScale = d3.scaleLinear()
                 .domain([1, maxFlow])
