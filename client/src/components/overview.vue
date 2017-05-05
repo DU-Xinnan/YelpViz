@@ -67,6 +67,10 @@
             PipeService.$on(PipeService.DATA_CHANGE, (newValue) => {
                 this.city = newValue;
                 const tmp = DataService.getDataWithValidImg();
+                this.points.map((point) => {
+                    map.removeLayer(point);
+                    return 0;
+                });
                 this.points = [];
                 console.log('refresh grid', 11);
                 // if (this.enableHeatmap) heatmapData = { max: 10, data: [] };
