@@ -39,8 +39,6 @@
             // let heatmapData;
             // const baseLayer = this.$children[0].$children[0].$tileLayer;
             if (debug) console.log('map', map);
-            // const baseLayer = this.$children[0].$children[0].$tileLayer;
-
             if (debug) console.log('this', this);
 
             if (this.enableHeatmap) {
