@@ -11,3 +11,5 @@ server/routes/__pycache__/
 npm-debug.log
 .vscode/
 jsconfig.json
+client/images/
+client/images.rar
