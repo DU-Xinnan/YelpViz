@@ -1,9 +1,9 @@
 <template>
-<div class="container" :id = "`a${this.restaurant.business_id}a`">
+<div class="container" :id = "`a${this.restaurant.business_id}a`" >
     <div class="card">
         <div class="row">
             <div class="col-md-4">
-                <!--<img :src = "`../images/${this.city}/${this.restaurant.images[0].image}`">-->
+                <img :src = "`http://localhost:8888/${this.city}/${this.restaurant.images[0].image}`" v-on:mouseover="mouseOverDiv" v-on:mouseout = "mouseOutDiv">
             </div>
             <div class="col-md-8">
                 <div class="row res_row">
@@ -28,7 +28,7 @@
 
 <script>
 import * as d3 from 'd3';
-// import PipeService from '../../services/pipe-service';
+import PipeService from '../../services/pipe-service';
 import DataService from '../../services/data-service';
 
 export default {
@@ -84,6 +84,12 @@ export default {
             const cityName = this.processName(this.city);
             const URL = `https://en.yelp.com.hk/biz_photos/${[name, cityName].join('-')}?tab=food`;
             return URL;
+        },
+        mouseOverDiv() {
+            PipeService.$emit(PipeService.MOUSEON_DIV, this.restaurant.business_id);
+        },
+        mouseOutDiv() {
+            PipeService.$emit(PipeService.MOUSEOUT_DIV, this.restaurant.business_id);
         },
     },
 };

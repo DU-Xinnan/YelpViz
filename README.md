@@ -1,4 +1,4 @@
-## Healthy Yelp Viz
+﻿## Healthy Yelp Viz
 
 Project Description
 > Healthy Yelp Viz
@@ -44,5 +44,18 @@ npm run dev
 
 # build for production with minification
 npm run build
+```
+
+### Local Http Server
+``` bash
+#Install http-server
+npm install -g http-server
+
+# enter the front end sub-directory
+cd ./client/images/
+
+# start the server so we can access images
+http-server -p 8888
+
 ```
 
