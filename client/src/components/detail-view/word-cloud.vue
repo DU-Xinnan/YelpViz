@@ -5,6 +5,7 @@
 <script>
     import 'echarts-wordcloud';
     import * as echarts from 'echarts';
+    import * as d3 from 'd3';
     import DataService from '../../services/data-service';
     import PipeService from '../../services/pipe-service';
 
@@ -57,17 +58,16 @@
                 return ret;
             },
 
-            add_color(entry) {
-                const tmp = entry;
-                tmp.textStyle = {};
-                tmp.textStyle.normal = {};
-                tmp.textStyle.normal.color = `rgb(${Math.round(Math.random() * 160)}, ${Math.round(Math.random() * 160)}, ${Math.round(Math.random() * 160)})`;
-            },
 
             drawCloud(words) {
                 const chart = echarts.init(this.$refs.cloud);
-
-                words.forEach(this.add_color);
+                const color = d3.scaleOrdinal(d3.schemeCategory20);
+                words.forEach((w) => {
+                    const tmp = w;
+                    tmp.textStyle = {};
+                    tmp.textStyle.normal = {};
+                    tmp.textStyle.normal.color = `${color(Math.round(Math.random() * 20))}`;
+                });
                 console.log(words);
 
                 chart.setOption({
