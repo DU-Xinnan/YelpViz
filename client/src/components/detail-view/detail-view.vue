@@ -3,8 +3,7 @@
         <div class="container">
             <h1>Checkin Time</h1>
             <div class='control-colum'>
-                <check-in-vis></check-in-vis>
-                <img src='./radarchart.jpg' style="width: 60% ;height: 100%; margin-left: 20%" >
+                <check-in-vis style="width: 100%; height: 100%"></check-in-vis>
             </div>
             <h1>Review Text Wordle</h1>
             <div class='control-colum'>

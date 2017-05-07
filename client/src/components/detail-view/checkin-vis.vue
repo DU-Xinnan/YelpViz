@@ -24,6 +24,7 @@ export default {
     data() {
         return {
             data: null,
+            maxFlow: null,
             config: {
                 Date: {
                     Sun: 0,
@@ -34,7 +35,8 @@ export default {
                     Fri: 5,
                     Sat: 6,
                 },
-                clockRadius: 120,
+                clockRadius: 80,
+                dotRadius: 2,
             },
         };
     },
@@ -44,6 +46,12 @@ export default {
         // },
         testData(data) {
             console.log(data);
+        },
+        getWeekDayColor(weekday) {
+            const colorScale = d3.scaleLinear()
+                .domain([0, 1, 2, 3, 4, 5, 6])
+                .range(['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69']);
+            return colorScale(this.config.Date[weekday]);
         },
         computeMaxFlow() {
             // the first index is maxflow in one day in all restaurants
@@ -70,16 +78,6 @@ export default {
             });
             return [maxFlow, maxtotalFlow];
         },
-        // computeRestaurantFlow(timeArr) {
-        //     // given a resaurant, compute the total flow
-        // },
-        // computeRestaurantWeekdayFlow(timeArr) {
-        //     // given a time array of a restaurant, return its own weekday flow
-
-        // },
-        // // drawRestaurantView(restaurant) {
-        // //     WorkingRestaurant = JSON.parse(JSON.stringify(restaurant));
-        // },
         initCheckinTime() {
             const timedict = {};
             timedict.Sun = [];
@@ -119,6 +117,32 @@ export default {
             });
             return checkinTime;
         },
+        draw_checkinflow(restCheckinData, maxFlow) {
+            const flowScale = d3.scaleLinear()
+                .domain([1, maxFlow])
+                .range([1, this.config.clockRadius - 4]);
+            const svg = d3.select(this.$refs.checkincanvas).select('svg').select('#container');
+            Object.keys(restCheckinData).forEach((weekday) => {
+                if (restCheckinData[weekday].length !== 0) {
+                    restCheckinData[weekday].forEach((timeflow) => {
+                        Object.keys(timeflow).forEach((key) => {
+                            const flow = parseInt(flowScale(timeflow[key]), 10);
+                            const xCoor = ((this.config.clockRadius - 15) *
+                                (flow / maxFlow)) * Math.cos((key *
+                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+                            const yCoor = ((this.config.clockRadius - 15) *
+                                (flow / maxFlow)) * Math.sin((key *
+                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+                            svg.append('circle')
+                            .attr('r', this.config.dotRadius)
+                            .attr('cx', xCoor)
+                            .attr('cy', yCoor)
+                            .attr('fill', () => this.getWeekDayColor(weekday));
+                        });
+                    });
+                }
+            });
+        },
         drawCheckInView() {
             const VERTICAL_MARGIN = 10;
             const HORIZONTAL_MARGIN = 10;
@@ -130,15 +154,16 @@ export default {
             if (!canvas.empty()) {
                 canvas.remove();
             }
+            console.log('hello');
             const checkinTime = this.reStructureData();
-            console.log(checkinTime);
 
             const svg = d3.select(el).append('svg')
                 .attr('width', this.canvasWidth + (HORIZONTAL_MARGIN * 2))
                 .attr('height', this.canvasHeight +
                     (VERTICAL_MARGIN * 2))
                 .append('g')
-                .attr('transform', `translate(${HORIZONTAL_MARGIN}, ${VERTICAL_MARGIN})`);
+                .attr('id', 'container')
+                .attr('transform', `translate(${120}, ${95})`);
 
             const tip = d3.tip().attr('class', 'd3-tip').html((nd) => {
                 if (nd.name !== undefined) {
@@ -151,17 +176,49 @@ export default {
 
             svg.call(tip);
             // const self = this;
-            // const degree = 360 / 24;
-
+            const degree = 360 / 24;
             const maxFlow = this.computeMaxFlow()[0];
-            const maxTotalFlow = this.computeMaxFlow()[1];
-            // console.log(clockRadius);
-            console.log(maxFlow, maxTotalFlow);
-            // const flowScale = d3.linearScale()
-            const flowScale = d3.scaleLinear()
-                .domain([1, maxFlow])
-                .range([1, maxFlow]);
-            console.log(flowScale);
+            this.maxFlow = maxFlow;
+
+            let startAngle = 0;
+
+            for (let i = 0; i <= 23; i += 1) {
+                const angle = (degree) * (Math.PI / 180);
+                const arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(this.config.clockRadius)
+                    .startAngle(startAngle)
+                    .endAngle(startAngle + angle);
+                svg.append('path')
+                    .attr('d', arc)
+                    .attr('stroke', 'gray')
+                    .attr('stroke-width', '1')
+                    .attr('stroke-opacity', '0.3')
+                    .attr('fill', 'white');
+
+                const xDot = (this.config.clockRadius) * Math.cos(startAngle - (Math.PI / 2));
+                const yDot = (this.config.clockRadius) * Math.sin(startAngle - (Math.PI / 2));
+                const xCoor = (this.config.clockRadius + 7) * Math.cos(startAngle - (Math.PI / 2));
+                const yCoor = (this.config.clockRadius + 7) * Math.sin(startAngle - (Math.PI / 2));
+
+                svg.append('circle')
+                    .attr('r', this.config.dotRadius)
+                    .attr('cx', xDot)
+                    .attr('cy', yDot)
+                    .attr('fill', 'steelblue');
+                svg.append('text')
+                    .attr('font-size', '10px')
+                    .attr('fill', 'white')
+                    .attr('x', xCoor)
+                    .attr('y', yCoor)
+                    .attr('transform', `translate(${-4},${-2})`)
+                    .text(`${i}`);
+                startAngle += angle;
+            }
+
+            Object.keys(checkinTime).forEach((key) => {
+                this.draw_checkinflow(checkinTime[key], this.maxFlow);
+            });
         },
     },
 };
