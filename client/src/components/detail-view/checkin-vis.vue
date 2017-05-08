@@ -217,6 +217,9 @@ export default {
             this.canvasWidth = document.querySelector('#checkin-vis-container').clientWidth - (HORIZONTAL_MARGIN * 2);
             this.canvasHeight = document.querySelector('#checkin-vis-container').clientHeight - (VERTICAL_MARGIN * 2);
 
+            this.config.clockRadius = this.canvasHeight > this.canvasWidth ?
+            (this.canvasWidth / 2) : (this.canvasHeight / 2);
+
             const canvas = d3.select(el).select('svg');
             if (!canvas.empty()) {
                 canvas.remove();
@@ -231,7 +234,10 @@ export default {
                     (VERTICAL_MARGIN * 2))
                 .append('g')
                 .attr('id', 'container')
-                .attr('transform', `translate(${120}, ${95})`);
+                .attr('transform', `translate(${(this.canvasWidth +
+                    (HORIZONTAL_MARGIN * 2)) / 2},
+                    ${(this.canvasHeight +
+                    (VERTICAL_MARGIN * 2)) / 2})`);
 
             const tip = d3.tip().attr('class', 'd3-tip').html((nd) => {
                 if (nd.name !== undefined) {
@@ -279,7 +285,7 @@ export default {
                     .attr('fill', 'white')
                     .attr('x', xCoor)
                     .attr('y', yCoor)
-                    .attr('transform', `translate(${-4},${-2})`)
+                    .attr('transform', `translate(${-4},${2})`)
                     .text(`${i}`);
                 startAngle += angle;
             }
