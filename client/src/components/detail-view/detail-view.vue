@@ -11,7 +11,7 @@
             </div>
             <h1>Review Sentiment Analysis</h1>
              <div class='control-colum'>
-                 <img src='./sentiment.png' style="width: 80% ;height: 100%; margin-left: 10%;  height: 90%; margin-top: 1.5%" >
+                <sentiment-vis style="width: 100%; height: 115%"></sentiment-vis>
             </div>
              <!-- <div class='control-colum'>
             </div> -->
@@ -22,12 +22,14 @@
 <script>
 import CheckInVis from './checkin-vis';
 import WordCloud from './word-cloud';
+import SentimentVis from './sentiment-vis';
 
 export default {
     name: 'DetailView',
     components: {
         CheckInVis,
         WordCloud,
+        SentimentVis,
     },
     mounted() {
     },

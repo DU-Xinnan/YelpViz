@@ -15,16 +15,13 @@
             PipeService.$on(PipeService.DATA_CHANGE, () => {
                 const data = DataService.getCloudData();
                 this.data = data;
-                console.log(data);
                 // console.log(`images: ${this.data}`);
                 // TODO: map function to change data
                 this.drawCloud(this.data);
             });
 
-            PipeService.$on(PipeService.CLICK_POINT, (id) => {
-                console.log('id', id);
+            PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
                 const words = this.getRestWordsById(id);
-                console.log(words);
                 this.drawCloud(words);
             });
         },
@@ -40,7 +37,6 @@
                 const existingTags = new Set();
                 const ret = [];
                 const restaurant = rests.filter(rest => rest.business_id === id)[0];
-                console.log(restaurant.images);
                 restaurant.images.forEach((m) => {
                     m.lables.forEach((v) => {
                         if (existingTags.has(v.description)) {
@@ -68,7 +64,6 @@
                     tmp.textStyle.normal = {};
                     tmp.textStyle.normal.color = `${color(Math.round(Math.random() * 20))}`;
                 });
-                console.log(words);
 
                 chart.setOption({
                     series: [

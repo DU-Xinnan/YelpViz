@@ -28,3 +28,8 @@ def get_data(dataname):
 def get_cloud_data(dataname):
     instance = get_class_instance(dataname)
     return instance.get_cloud()
+
+@app.route('/api/sentiData/<dataname>')
+def get_sentiment_data(dataname):
+    instance = get_class_instance(dataname)
+    return instance.get_sentiment()

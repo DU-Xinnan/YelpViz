@@ -4,6 +4,7 @@ class Cleveland():
 
     dataURL = './data/Cleveland_complete.json'
     cloudURL = './data/Cleveland_food.json'
+    sentimentURL = './data/Cleveland_senti_count.json'
 
     @classmethod
     def get_data(cls):
@@ -20,6 +21,12 @@ class Cleveland():
             json_data = cls.filter_data(json_data)
             return json.dumps(json_data)
 
+    @classmethod
+    def get_sentiment(cls):
+        with open(cls.sentimentURL, 'r') as jsonFile:
+            json_data = json.load(jsonFile)
+            json_data = cls.filter_data(json_data)
+            return json.dumps(json_data)
 
     @classmethod
     def filter_data(cls, data):

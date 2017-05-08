@@ -27,12 +27,14 @@ export default {
     },
     watch: {
         selectedDataName(newValue) {
-            // NetService.getDistributionData((response) => {
-            //     DataService.setDistributionData(response.data);
-            // });
             NetService.getCloudData(newValue, (response) => {
                 const Data = response.data;
                 DataService.setCloudData(Data);
+            });
+
+            NetService.getSentimentData(newValue, (response) => {
+                const Data = response.data;
+                DataService.setSentimentData(Data);
             });
 
             NetService.getData(newValue, (response) => {

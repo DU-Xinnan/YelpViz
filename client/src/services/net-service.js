@@ -41,8 +41,15 @@ function getCloudData(name, callback) {
     request(url, params, GET_REQUEST, callback);
 }
 
+function getSentimentData(name, callback) {
+    const url = `${devApiUrl}/sentiData/${name}`;
+    const params = {};
+    request(url, params, GET_REQUEST, callback);
+}
+
 export default {
     getDataList,
     getData,
     getCloudData,
+    getSentimentData,
 };

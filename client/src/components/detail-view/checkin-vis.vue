@@ -20,7 +20,7 @@ export default {
             this.data = data;
             this.drawCheckInView();
         });
-        PipeService.$on(PipeService.CLICK_POINT, (id) => {
+        PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
             const el = this.$refs.checkincanvas;
             const VERTICAL_MARGIN = 10;
             const HORIZONTAL_MARGIN = 10;
@@ -34,7 +34,10 @@ export default {
                     (VERTICAL_MARGIN * 2))
                 .append('g')
                 .attr('id', 'container')
-                .attr('transform', `translate(${120}, ${95})`);
+                .attr('transform', `translate(${(this.canvasWidth +
+                    (HORIZONTAL_MARGIN * 2)) / 2},
+                    ${(this.canvasHeight +
+                    (VERTICAL_MARGIN * 2)) / 2})`);
 
             const degree = 360 / 24;
 
@@ -69,7 +72,7 @@ export default {
                     .attr('fill', 'white')
                     .attr('x', xCoor)
                     .attr('y', yCoor)
-                    .attr('transform', `translate(${-4},${-2})`)
+                    .attr('transform', `translate(${-4},${2})`)
                     .text(`${i}`);
                 startAngle += angle;
             }
@@ -224,7 +227,7 @@ export default {
             if (!canvas.empty()) {
                 canvas.remove();
             }
-            console.log('hello');
+
             const checkinTime = this.reStructureData();
             this.checkinTime = checkinTime;
 

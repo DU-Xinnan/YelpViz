@@ -13,6 +13,7 @@ class Service {
         this.id2index = undefined;
         this.city = undefined;
         this.cloudData = undefined;
+        this.sentimentData = undefined;
         return instance;
     }
 
@@ -62,6 +63,14 @@ class Service {
     getCheckInTimeData() {
         // console.log(this.checkinTime);
         return this.checkinTime;
+    }
+
+    setSentimentData(data) {
+        this.sentimentData = data[0];
+    }
+
+    getSentimentData() {
+        return this.sentimentData;
     }
 
     setDataWithValidImg() {
