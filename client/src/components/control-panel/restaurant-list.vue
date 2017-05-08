@@ -6,19 +6,22 @@
                 <img :src = "`http://localhost:8888/${this.city}/${this.restaurant.images[0].image}`" v-on:mouseover="mouseOverDiv" v-on:mouseout = "mouseOutDiv">
             </div>
             <div class="col-md-8">
-                <div class="row res_row">
-                    <a :href="this.URL" target="#" style="text-decoration: none; color: black;">{{`${this.index + 1}. ${this.restaurant.name}`}}</a>
+                <div class="row res_row" style="transform: translateX(-10px)">
+                    <a :href="this.URL" target="#" style="text-decoration: none; color: black; font-weight: bold; font-size: 15px">{{`${this.index + 1}. ${this.restaurant.name}`}}</a>
+                </div>
+                    <div class="row res_row">
+                        <div class="col-md-4" style="transform: translateY(38px) translateX(-20px);">
+                            <div class='star-ratings-sprite'><span
+                            :style="{'width': `${this.stars}%`}"
+                            class='star-ratings-sprite-rating'></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="transform: translateX(70%) translateY(10px)">
+                        <p style="font-weight: bold">{{`${this.restaurant.images.length} imgs`}}</p>
+                    </div>
                 </div>
                 <div class="row res_row">
-                    <div class="col-md-4 star">
-                        <b>{{`${this.restaurant.stars}`}}</b>
-                    </div>
-                    <div class="col-md-8">
-                        <p>{{`${this.restaurant.images.length} imgs`}}</p>
-                    </div>
-                </div>
-                <div class="row res_row">
-                    
                 </div>
             </div>
         </div>
@@ -46,6 +49,7 @@ export default {
             background: undefined,
             city: undefined,
             URL: undefined,
+            stars: this.restaurant.stars * 20,
         };
     },
     props: {
@@ -106,7 +110,66 @@ img
     height: 32px
 p
     text-align: center
-.star
-    background-color: grey
-    border-radius: 5px
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+.star-ratings-css
+    unicode-bidi bidi-override
+    color #c5c5c5
+    font-size 25px
+    height 25px
+    width 100px
+    margin 0 auto
+    position relative
+    padding 0
+    text-shadow 0px 1px 0 #a2a2a2
+
+.star-ratings-css-top
+    color #e7711b
+    padding 0
+    position absolute
+    z-index 1
+    display block
+    top 0
+    left 0
+    overflow hidden
+
+.star-ratings-css-bottom
+    padding 0
+    display block
+    z-index 0
+
+.star-ratings-sprite
+    background url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x
+    font-size 0
+    height 21px
+    line-height 0
+    overflow hidden
+    text-indent -999em
+    width 110px
+    margin 0 auto
+
+.star-ratings-sprite-rating
+    background url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x
+    background-position 0 100%
+    float left
+    height 21px
+    display block
+
+body
+    margin 50px
+    text-align center
+    font-family 'Open Sans', sans-serif
+    background #f2fbff
+
+em
+    font-style italic
+
+h1
+    font-size 24px
+    margin-bottom 25px
+    font-weight bold
+    text-transform uppercase
+
+h2
+    font-size 16px
+    margin-bottom 15px
 </style>

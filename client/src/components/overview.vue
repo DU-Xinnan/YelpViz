@@ -287,7 +287,6 @@
                             <div class='col-md-8' style='transform: translateX(10px)'>
                             <p>Restaurant Name: ${m.name}</p>
                             <p>Stars: ${m.stars}</p>
-                            </div>
                         </div>
                         </div>`;
                         c.bindPopup(popContent);
