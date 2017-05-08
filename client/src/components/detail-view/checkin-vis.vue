@@ -224,7 +224,7 @@ export default {
             if (!canvas.empty()) {
                 canvas.remove();
             }
-            console.log('hello');
+            // console.log('hello');
             const checkinTime = this.reStructureData();
             this.checkinTime = checkinTime;
 
