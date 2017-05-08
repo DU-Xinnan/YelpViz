@@ -72,6 +72,7 @@
                     return 0;
                 });
                 this.points = [];
+                this.restDrawn = false;
                 console.log('refresh grid', 11);
                 // if (this.enableHeatmap) heatmapData = { max: 10, data: [] };
 
@@ -97,23 +98,17 @@
                 // console.log('id', id);
                 this.points.map((point) => {
                     if (point.options.businessID === id) {
-                        console.log('matched', point);
-                        const popContent = `<div class='container'>
-  <div class='row'>
-    <div class='col-md-4'>
-      <img width='100px' height='100px' src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" />
-    </div>
-    <div class='col-md-8' style='transform: translateX(10px)'>
-      <p>Restaurant Name: ${point.options.name}</p>
-      <p>Stars: ${point.options.stars}</p>
-    </div>
-  </div>
-</div>`;
-                        point.bindPopup(popContent).openPopup();
+                        // console.log('matched', point);
                         this.hoveredRestaurant = point;
                         map.panTo(point.getLatLng());
-                        const wrapper = document.getElementsByClassName('leaflet-popup-content-wrapper')[0];
-                        wrapper.style.backgroundColor = point.options.healthColor;
+                        point.openPopup();
+                        const wrapper = document.getElementsByClassName('leaflet-popup-content-wrapper');
+                        wrapper[0].style.backgroundColor = point.options.healthColor;
+                        wrapper[0].style.opacity = 0.8;
+                        // if (wrapper.length > 1) {
+                        //     wrapper[1].style.backgroundColor = point.options.healthColor;
+                        //     wrapper[1].style.opacity = 0.8;
+                        // }
                     }
                     return 0;
                 });
@@ -122,7 +117,9 @@
 
             PipeService.$on(PipeService.MOUSEOUT_DIV, (id) => {
                 if (debug) console.log('id', id);
-                this.hoveredRestaurant.closePopup();
+                if (this.hoveredRestaurant) {
+                    this.hoveredRestaurant.closePopup();
+                }
                 return 0;
             });
         },
@@ -166,6 +163,7 @@
                 zoomFlag: false,
                 city: undefined,
                 hoveredRestaurant: undefined,
+                restDrawn: false,
             };
         },
         methods: {
@@ -231,7 +229,6 @@
                 // map.setZoom(1);
                 // map.setZoom(level);
 
-                const newMarkers = [];
                 // setup hexagon params
                 const hexRadius = this.hRadius / Math.pow(1.5, (level - 11));
                 const hex1 = hexRadius / 2;
@@ -264,16 +261,40 @@
                     healthIndex /= m.images.length;
                     if (debug) console.log('health Index', healthIndex);
                     if (debug) console.log('cnt photo number', pointRadius);
-                    newMarkers.push({
-                        latLng: L.latLng(m.latitude, m.longitude),
-                        businessID: m.business_id,
-                        cntPhoto: pointRadius,
-                        healthInd: healthIndex,
-                        sampleImg: m.images[0].image,
-                        name: m.name,
-                        stars: m.stars,
-                    });
 
+                    // draw the restaurant on the map
+                    const baseRadius = pointRadius * 30;
+                    if (!(this.restDrawn)) {
+                        const c = L.circle(L.latLng(m.latitude, m.longitude),
+                            {
+                                radius: baseRadius,
+                                fillColor: this.getColor(healthIndex),
+                                stroke: false,
+                                fillOpacity: 1,
+                                businessID: m.business_id,
+                                healthColor: this.getColor(healthIndex),
+                                // name: m.name,
+                                // stars: m.stars,
+                                // city: m.city,
+                                // images: m.images,
+                                baseR: baseRadius,
+                            }).addTo(map);
+                        const popContent = `<div class='container'>
+                        <div class='row'>
+                            <div class='col-md-4' style='transform: translateX(-10px)'>
+                            <img width='100px' height='100px' src="http://localhost:8888/${m.city}/${m.images[0].image}" />
+                            </div>
+                            <div class='col-md-8' style='transform: translateX(10px)'>
+                            <p>Restaurant Name: ${m.name}</p>
+                            <p>Stars: ${m.stars}</p>
+                            </div>
+                        </div>
+                        </div>`;
+                        c.bindPopup(popContent);
+                        this.points.push(c);
+                    }
+
+                    // Caculate the Hexagon grid params
                     const x = Math.floor((nw.lat - m.latitude) / hex2);
                     const y = Math.floor((m.longitude - nw.lng) / hexRadius / 1.5);
                     if (x < 0 || y < 0 || x >= hexHeight || y > hexWidth * 2) return 0;
@@ -314,6 +335,12 @@
 
                     return 0;
                 });
+                this.restDrawn = true;
+                this.points.map((point) => {
+                    point.setRadius(point.options.baseR / Math.pow(1.5, level - 11));
+                    point.bringToFront();
+                    return 0;
+                });
 
                 // Creata the hexagon grid
                 for (let x = 0; x < hexHeight; x += 1) {
@@ -349,44 +376,6 @@
                 //     heatmapLayer.addTo(map);
                 //     if (debug) console.log('after mounted', heatmapLayer);
                 // }
-
-                // draw the restaurant on the map
-                const tempPoints = [];
-                if (this.points.length === 0) {
-                    newMarkers.map((m) => {
-                        const c = L.circle(m.latLng, {
-                            // radius: m.cntPhoto * 2,
-                            radius: m.cntPhoto * 30,
-                            fillColor: this.getColor(m.healthInd),
-                            stroke: false,
-                            fillOpacity: 1,
-                            selfDefine: m.cntPhoto * 30,
-                            businessID: m.businessID,
-                            healthColor: this.getColor(m.healthInd),
-                            name: m.name,
-                            stars: m.stars,
-                        }).addTo(map);
-                        c.on({
-                            click: () => {
-                                this.mClickHandler(m.businessID);
-                            },
-                        });
-                        if (debug) console.log('new circle', c);
-                        // const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
-
-                        // if (debug) console.log(popContent);
-                        // c.bindPopup(popContent);
-                        tempPoints.push(c);
-                        return 0;
-                    });
-                    this.points = tempPoints;
-                } else {
-                    this.points.map((point) => {
-                        point.setRadius(point.options.selfDefine / Math.pow(1.5, level - 11));
-                        point.bringToFront();
-                        return 0;
-                    });
-                }
                 this.zoomFlag = false;
             },
         },
