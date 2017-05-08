@@ -20,6 +20,75 @@ export default {
             this.data = data;
             this.drawCheckInView();
         });
+        PipeService.$on(PipeService.CLICK_POINT, (id) => {
+            const el = this.$refs.checkincanvas;
+            const VERTICAL_MARGIN = 10;
+            const HORIZONTAL_MARGIN = 10;
+            const canvas = d3.select(el).select('svg');
+            if (!canvas.empty()) {
+                canvas.remove();
+            }
+            const svg = d3.select(el).append('svg')
+                .attr('width', this.canvasWidth + (HORIZONTAL_MARGIN * 2))
+                .attr('height', this.canvasHeight +
+                    (VERTICAL_MARGIN * 2))
+                .append('g')
+                .attr('id', 'container')
+                .attr('transform', `translate(${120}, ${95})`);
+
+            const degree = 360 / 24;
+
+            let startAngle = 0;
+
+            for (let i = 0; i <= 23; i += 1) {
+                const angle = (degree) * (Math.PI / 180);
+                const arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(this.config.clockRadius)
+                    .startAngle(startAngle)
+                    .endAngle(startAngle + angle);
+                svg.append('path')
+                    .attr('d', arc)
+                    .attr('stroke', 'gray')
+                    .attr('stroke-width', '1')
+                    .attr('stroke-opacity', '0.3')
+                    .attr('fill', 'white');
+
+                const xDot = (this.config.clockRadius) * Math.cos(startAngle - (Math.PI / 2));
+                const yDot = (this.config.clockRadius) * Math.sin(startAngle - (Math.PI / 2));
+                const xCoor = (this.config.clockRadius + 7) * Math.cos(startAngle - (Math.PI / 2));
+                const yCoor = (this.config.clockRadius + 7) * Math.sin(startAngle - (Math.PI / 2));
+
+                svg.append('circle')
+                    .attr('r', this.config.dotRadius)
+                    .attr('cx', xDot)
+                    .attr('cy', yDot)
+                    .attr('fill', 'steelblue');
+                svg.append('text')
+                    .attr('font-size', '10px')
+                    .attr('fill', 'white')
+                    .attr('x', xCoor)
+                    .attr('y', yCoor)
+                    .attr('transform', `translate(${-4},${-2})`)
+                    .text(`${i}`);
+                startAngle += angle;
+            }
+
+            let maxFlow = 0;
+            if (this.checkinTime[id] !== undefined) {
+                Object.keys(this.checkinTime[id]).forEach((weekday) => {
+                    if (this.checkinTime[id][weekday].length !== 0) {
+                        this.checkinTime[id][weekday].forEach((hourflow) => {
+                            Object.keys(hourflow).forEach((key) => {
+                                maxFlow = hourflow[key] > maxFlow ? hourflow[key] : maxFlow;
+                            });
+                        });
+                    }
+                });
+            }
+
+            this.draw_checkinflow(this.checkinTime[id], maxFlow);
+        });
     },
     data() {
         return {
@@ -120,18 +189,16 @@ export default {
         draw_checkinflow(restCheckinData, maxFlow) {
             const flowScale = d3.scaleLinear()
                 .domain([1, maxFlow])
-                .range([1, this.config.clockRadius - 4]);
+                .range([1, this.config.clockRadius]);
             const svg = d3.select(this.$refs.checkincanvas).select('svg').select('#container');
             Object.keys(restCheckinData).forEach((weekday) => {
                 if (restCheckinData[weekday].length !== 0) {
                     restCheckinData[weekday].forEach((timeflow) => {
                         Object.keys(timeflow).forEach((key) => {
-                            const flow = parseInt(flowScale(timeflow[key]), 10);
-                            const xCoor = ((this.config.clockRadius - 15) *
-                                (flow / maxFlow)) * Math.cos((key *
+                            const flow = flowScale(timeflow[key]);
+                            const xCoor = (flow) * Math.cos((key *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
-                            const yCoor = ((this.config.clockRadius - 15) *
-                                (flow / maxFlow)) * Math.sin((key *
+                            const yCoor = (flow) * Math.sin((key *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
                             svg.append('circle')
                             .attr('r', this.config.dotRadius)
@@ -156,6 +223,7 @@ export default {
             }
             console.log('hello');
             const checkinTime = this.reStructureData();
+            this.checkinTime = checkinTime;
 
             const svg = d3.select(el).append('svg')
                 .attr('width', this.canvasWidth + (HORIZONTAL_MARGIN * 2))
