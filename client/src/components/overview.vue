@@ -91,6 +91,20 @@
                 const restaurantURL = this.getResaurantUrl(id);
                 console.log(restaurantURL);
                 window.open(restaurantURL, '_blank');
+                window.focus();
+            });
+
+            PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
+                // console.log('id', id);
+                this.points.map((point) => {
+                    if (point.options.businessID === id) {
+                        // console.log('matched', point);
+                        const popContent = `<div><b>Res Id: ${point.options.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
+                        point.bindPopup(popContent).openPopup();
+                    }
+                    return 0;
+                });
+                return 0;
             });
         },
         data() {
@@ -324,6 +338,7 @@
                             stroke: false,
                             fillOpacity: 1,
                             selfDefine: m.cntPhoto * 30,
+                            businessID: m.businessID,
                         }).addTo(map);
                         c.on({
                             click: () => {
@@ -331,10 +346,10 @@
                             },
                         });
                         if (debug) console.log('new circle', c);
-                        const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
+                        // const popContent = `<div><b>Res Id: ${m.businessID} </b><img style="width: 100px; height: 100px:" src="https://s3-media3.fl.yelpcdn.com/bphoto/14ctFBcm3DobkE4rSMABaQ/o.jpg" /></div>`;
 
-                        if (debug) console.log(popContent);
-                        c.bindPopup(popContent);
+                        // if (debug) console.log(popContent);
+                        // c.bindPopup(popContent);
                         tempPoints.push(c);
                         return 0;
                     });
