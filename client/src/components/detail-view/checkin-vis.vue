@@ -21,6 +21,7 @@ export default {
             this.drawCheckInView();
         });
         PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
+            this.initializaRadar();
             const el = this.$refs.checkincanvas;
             const VERTICAL_MARGIN = 10;
             const HORIZONTAL_MARGIN = 10;
@@ -55,7 +56,7 @@ export default {
                     .attr('stroke', 'gray')
                     .attr('stroke-width', '1')
                     .attr('stroke-opacity', '0.3')
-                    .attr('fill', 'white');
+                    .attr('fill', 'gray');
 
                 const xDot = (this.config.clockRadius) * Math.cos(startAngle - (Math.PI / 2));
                 const yDot = (this.config.clockRadius) * Math.sin(startAngle - (Math.PI / 2));
@@ -84,19 +85,52 @@ export default {
                         this.checkinTime[id][weekday].forEach((hourflow) => {
                             Object.keys(hourflow).forEach((key) => {
                                 maxFlow = hourflow[key] > maxFlow ? hourflow[key] : maxFlow;
+                                this.radar[key] += hourflow[key];
                             });
                         });
                     }
                 });
             }
 
+            let maxhourFlow = 0;
+            Object.keys(this.radar).forEach((key) => {
+                maxhourFlow = this.radar[key] > maxhourFlow ? this.radar[key] : maxhourFlow;
+            });
+
             this.draw_checkinflow(this.checkinTime[id], maxFlow);
+            this.draw_radar(this.radar, maxhourFlow);
         });
     },
     data() {
         return {
             data: null,
             maxFlow: null,
+            radar: {
+                0: 0,
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0,
+                6: 0,
+                7: 0,
+                8: 0,
+                9: 0,
+                10: 0,
+                11: 0,
+                12: 0,
+                13: 0,
+                14: 0,
+                15: 0,
+                16: 0,
+                17: 0,
+                18: 0,
+                19: 0,
+                20: 0,
+                21: 0,
+                22: 0,
+                23: 0,
+            },
             config: {
                 Date: {
                     Sun: 0,
@@ -180,6 +214,7 @@ export default {
                             if (debug) console.log(hour);
                             const hourFlow = {};
                             hourFlow[hour] = flow;
+                            this.radar[hour] += flow;
                             if (debug) console.log(checkinTime[businessid]);
                             checkinTime[businessid][weekday].push(hourFlow);
                             if (debug) console.log('checkinTime');
@@ -189,9 +224,54 @@ export default {
             });
             return checkinTime;
         },
+        initializaRadar() {
+            Object.keys(this.radar).forEach((key) => {
+                this.radar[key] = 0;
+            });
+        },
+        draw_radar(data, maxhourFlow) {
+            const svg = d3.select(this.$refs.checkincanvas).select('svg').select('#container');
+            const flowScale = d3.scaleLinear()
+                .domain([0, maxhourFlow])
+                .range([1, this.config.clockRadius]);
+            const zeroflow = flowScale(data[0]);
+            const xZero = (zeroflow) * Math.cos((0 *
+                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+            const yZero = (zeroflow) * Math.sin((0 *
+                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+            let previousX = xZero;
+            let previousY = yZero;
+            Object.keys(data).forEach((key) => {
+                if (key !== 0) {
+                    const flow = flowScale(data[key]);
+                    const xCoor = (flow) * Math.cos((key *
+                            ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+                    const yCoor = (flow) * Math.sin((key *
+                            ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+                    svg.append('line')
+                        .attr('x1', previousX)
+                        .attr('y1', previousY)
+                        .attr('x2', xCoor)
+                        .attr('y2', yCoor)
+                        .attr('stroke-width', 1)
+                        .attr('stroke-opacity', 1)
+                        .attr('stroke', 'orange');
+                    previousX = xCoor;
+                    previousY = yCoor;
+                }
+            });
+            svg.append('line')
+                .attr('x1', previousX)
+                .attr('y1', previousY)
+                .attr('x2', xZero)
+                .attr('y2', yZero)
+                .attr('stroke-width', 1)
+                .attr('stroke-opacity', 1)
+                .attr('stroke', 'orange');
+        },
         draw_checkinflow(restCheckinData, maxFlow) {
             const flowScale = d3.scaleLinear()
-                .domain([1, maxFlow])
+                .domain([0, maxFlow])
                 .range([1, this.config.clockRadius]);
             const svg = d3.select(this.$refs.checkincanvas).select('svg').select('#container');
             Object.keys(restCheckinData).forEach((weekday) => {
@@ -227,6 +307,8 @@ export default {
             if (!canvas.empty()) {
                 canvas.remove();
             }
+
+            this.initializaRadar();
 
             const checkinTime = this.reStructureData();
             this.checkinTime = checkinTime;
@@ -271,7 +353,7 @@ export default {
                     .attr('stroke', 'gray')
                     .attr('stroke-width', '1')
                     .attr('stroke-opacity', '0.3')
-                    .attr('fill', 'white');
+                    .attr('fill', 'gray');
 
                 const xDot = (this.config.clockRadius) * Math.cos(startAngle - (Math.PI / 2));
                 const yDot = (this.config.clockRadius) * Math.sin(startAngle - (Math.PI / 2));
@@ -293,9 +375,17 @@ export default {
                 startAngle += angle;
             }
 
+            console.log(this.radar);
+            let maxhourFlow = 0;
+            Object.keys(this.radar).forEach((key) => {
+                maxhourFlow = this.radar[key] > maxhourFlow ? this.radar[key] : maxhourFlow;
+            });
+
             Object.keys(checkinTime).forEach((key) => {
                 this.draw_checkinflow(checkinTime[key], this.maxFlow);
             });
+
+            this.draw_radar(this.radar, maxhourFlow);
         },
     },
 };
