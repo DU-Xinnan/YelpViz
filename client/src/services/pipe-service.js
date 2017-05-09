@@ -8,6 +8,7 @@ const PipeService = new Vue({
         DATA_CHANGE: 'data-change',
         MOUSEON_DIV: 'mouseon-div',
         MOUSEOUT_DIV: 'mouseout-div',
+        MOUSEENTER_DIV: 'mouseenter-div',
     },
 });
 

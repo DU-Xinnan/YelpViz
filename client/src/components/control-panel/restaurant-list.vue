@@ -1,31 +1,29 @@
 <template>
-<div class="container" :id = "`a${this.restaurant.business_id}a`" >
-    <div class="card">
-        <div class="row">
-            <div class="col-md-4">
-                <img :src = "`http://localhost:8888/${this.city}/${this.restaurant.images[0].image}`" v-on:mouseover="mouseOverDiv" v-on:mouseout = "mouseOutDiv">
-            </div>
-            <div class="col-md-8">
-                <div class="row res_row" style="transform: translateX(-10px)">
-                    <a :href="this.URL" target="#" style="text-decoration: none; color: black; font-weight: bold; font-size: 15px">{{`${this.index + 1}. ${this.restaurant.name}`}}</a>
-                </div>
-                    <div class="row res_row">
-                        <div class="col-md-4" style="transform: translateY(38px) translateX(-20px);">
-                            <div class='star-ratings-sprite'><span
-                            :style="{'width': `${this.stars}%`}"
-                            class='star-ratings-sprite-rating'></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8" style="transform: translateX(70%) translateY(10px)">
-                        <p style="font-weight: bold">{{`${this.restaurant.images.length} imgs`}}</p>
-                    </div>
-                </div>
-                <div class="row res_row">
-                </div>
-            </div>
+<div class="container" :id="`a${this.restaurant.business_id}a`" v-on:mouseover="mouseOverDiv" v-on:mouseout="mouseOutDiv" v-on:mouseenter="mouseEnterDiv">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-4">
+        <img :src="`http://localhost:8888/${this.city}/${this.restaurant.images[0].image}`"   style="transform: translateY(10px)">
+      </div>
+      <div class="col-md-8">
+        <div class="row res_row" style="transform: translateX(-10px)">
+          <a :href="this.URL" target="#" style="text-decoration: none; color: black; font-weight: bold; font-size: 15px">{{`${this.index + 1}. ${this.restaurant.name}`}}</a>
         </div>
+        <canvas width="200" height="60" style="transform: translateX(-5%) translateY(30%); margin-top:-30px; margin-bottom:-20px" v-draw-mosaics="this" v-tooltip.left-middle="tipContent"></canvas>
+        <div class="row res_row">
+          <div class="col-md-4" style="transform: translateY(38px) translateX(-20px);">
+            <div class='star-ratings-sprite'><span :style="{'width': `${this.restaurant.stars * 20}%`}" class='star-ratings-sprite-rating'></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8" style="transform: translateX(70%) translateY(10px)">
+          <p style="font-weight: bold">{{`${this.restaurant.images.length} imgs`}}</p>
+        </div>
+      </div>
+      <div class="row res_row">
+      </div>
     </div>
+  </div>
 </div>
 </template>
 
@@ -43,13 +41,23 @@ export default {
         this.city = DataService.getCity();
         this.URL = this.getResaurantUrl(this.restaurant.business_id);
         // this.background = this.getColor(this.getAvgHealthIndex());
+        this.tipContent = `<div><img src='http://localhost:8888/${this.city}/${this.restaurant.images[0].image}' /></div>`;
+        this.tipContent = '<div>';
+        for (let i = 0; i < this.restaurant.images.length; i += 1) {
+            if (i % 7 === 0 && i !== 0) {
+                this.tipContent += '<br />';
+            }
+            this.tipContent += `<img src='http://localhost:8888/${this.city}/${this.restaurant.images[i].image}' style='width: 50px; height: 50px;'/>`;
+        }
+        this.tipContent += '</div>';
     },
     data() {
         return {
             background: undefined,
             city: undefined,
             URL: undefined,
-            stars: this.restaurant.stars * 20,
+            tip: undefined,
+            tipContent: '',
         };
     },
     props: {
@@ -57,6 +65,33 @@ export default {
         index: Number,
     },
     watch: {
+    },
+    directives: {
+        drawMosaics(canvasElement, binding) {
+            const imageColors = [];
+            const images = binding.value.restaurant.images;
+            images.map((img) => {
+                imageColors.push(binding.value.getColor(img.health_index));
+                return 0;
+            });
+            const ctx = canvasElement.getContext('2d');
+            // ctx.shadowColor = 'grey';
+            // ctx.shadowBlur = 10;
+            // ctx.shadowOffsetX = 5;
+            // ctx.shadowOffsetY = 5;
+            ctx.clearRect(0, 0, 200, 60);
+            for (let row = 0; row < 3; row += 1) {
+                for (let colume = 0; colume < 10; colume += 1) {
+                    if ((row * 10) + colume >= images.length) {
+                        return;
+                    }
+                    ctx.beginPath();
+                    ctx.fillStyle = imageColors[(row * 10) + colume];
+                    ctx.rect(colume * 20, row * 20, 20, 20);
+                    ctx.fill();
+                }
+            }
+        },
     },
     methods: {
         getAvgHealthIndex() {
@@ -94,6 +129,9 @@ export default {
         },
         mouseOutDiv() {
             PipeService.$emit(PipeService.MOUSEOUT_DIV, this.restaurant.business_id);
+        },
+        mouseEnterDiv() {
+            PipeService.$emit(PipeService.MOUSEENTER_DIV, this.restaurant.business_id);
         },
     },
 };

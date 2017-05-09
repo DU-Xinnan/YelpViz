@@ -20,7 +20,7 @@
                 this.drawCloud(this.data);
             });
 
-            PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
+            PipeService.$on(PipeService.MOUSEENTER_DIV, (id) => {
                 const words = this.getRestWordsById(id);
                 this.drawCloud(words);
             });

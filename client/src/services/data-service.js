@@ -76,7 +76,7 @@ class Service {
     setDataWithValidImg() {
         this.dataWithValidImg = [];
         this.data.forEach((restaurant) => {
-            if (restaurant.images.length > 0) {
+            if (restaurant.images.length > 3) {
                 this.dataWithValidImg.push(restaurant);
             }
         });

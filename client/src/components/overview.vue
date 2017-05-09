@@ -105,10 +105,10 @@
                         const wrapper = document.getElementsByClassName('leaflet-popup-content-wrapper');
                         wrapper[0].style.backgroundColor = point.options.healthColor;
                         wrapper[0].style.opacity = 0.8;
-                        // if (wrapper.length > 1) {
-                        //     wrapper[1].style.backgroundColor = point.options.healthColor;
-                        //     wrapper[1].style.opacity = 0.8;
-                        // }
+                        if (wrapper.length > 1) {
+                            wrapper[1].style.backgroundColor = point.options.healthColor;
+                            wrapper[1].style.opacity = 0.8;
+                        }
                     }
                     return 0;
                 });

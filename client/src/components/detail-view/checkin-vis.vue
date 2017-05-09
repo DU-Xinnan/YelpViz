@@ -20,7 +20,7 @@ export default {
             this.data = data;
             this.drawCheckInView();
         });
-        PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
+        PipeService.$on(PipeService.MOUSEENTER_DIV, (id) => {
             this.initializaRadar();
             const el = this.$refs.checkincanvas;
             const VERTICAL_MARGIN = 10;

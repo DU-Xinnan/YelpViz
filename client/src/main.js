@@ -2,10 +2,11 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 // import VueMaterial from 'vue-material';
 import Vue from 'vue';
+import VTooltip from 'v-tooltip';
 import App from './app';
 
 /* eslint-disable no-new */
-// Vue.use(VueMaterial);
+Vue.use(VTooltip);
 new Vue({
     el: '#app',
     template: '<App/>',

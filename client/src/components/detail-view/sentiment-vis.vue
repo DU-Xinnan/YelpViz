@@ -21,7 +21,7 @@ export default {
             this.data = data;
             this.drawCitySentiment();
         });
-        PipeService.$on(PipeService.MOUSEON_DIV, (id) => {
+        PipeService.$on(PipeService.MOUSEENTER_DIV, (id) => {
             this.drawRestaurantSentiment(this.data[id]);
         });
     },
