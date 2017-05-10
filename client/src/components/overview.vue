@@ -34,7 +34,6 @@
         mounted() {
             // this.appendMarkers();
             const map = this.$children[0].mapObject;
-
             let heatmapLayer;
             // let heatmapData;
             // const baseLayer = this.$children[0].$children[0].$tileLayer;
@@ -65,6 +64,8 @@
             });
 
             PipeService.$on(PipeService.DATA_CHANGE, (newValue) => {
+                // d3.select('#overview').style('width', '100%');
+                // d3.select('#map-area').style('width', '100%');
                 this.city = newValue;
                 const tmp = DataService.getDataWithValidImg();
                 this.points.map((point) => {
@@ -385,6 +386,8 @@
 @import "~leaflet/dist/leaflet.css";
 #overview
     width: 100%
+    height: 100%
+    position: absolute
 #map-area
     height: 100%
     padding-left: 15px

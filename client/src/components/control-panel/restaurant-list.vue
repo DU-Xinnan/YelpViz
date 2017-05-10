@@ -229,4 +229,8 @@ h1
 h2
     font-size 16px
     margin-bottom 15px
+.card
+    opacity: 0.9
+.card:hover
+    opacity: 10
 </style>
