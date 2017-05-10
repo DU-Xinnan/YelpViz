@@ -1,15 +1,15 @@
 <template>
 <div class="container" :id="`a${this.restaurant.business_id}a`" v-on:mouseover="mouseOverDiv" v-on:mouseout="mouseOutDiv" v-on:mouseenter="mouseEnterDiv">
-  <div class="card">
+  <div class="card" :style="{backgroundColor: getRestaurantColor(restaurant)}">
     <div class="row">
       <div class="col-md-4">
-        <img :src="`http://localhost:8888/${this.city}/${this.restaurant.images[0].image}`"   style="transform: translateY(10px)">
+        <img :src="`http://localhost:8888/${this.restaurant.city}/${this.restaurant.images[0].image}`"   style="transform: translateY(10px)">
       </div>
       <div class="col-md-8">
         <div class="row res_row" style="transform: translateX(-10px)">
           <a :href="this.URL" target="#" style="text-decoration: none; color: black; font-weight: bold; font-size: 15px">{{`${this.index + 1}. ${this.restaurant.name}`}}</a>
         </div>
-        <canvas width="200" height="60" style="transform: translateX(-5%) translateY(30%); margin-top:-30px; margin-bottom:-20px" v-draw-mosaics="this" v-tooltip.left-middle="tipContent"></canvas>
+        <canvas width="200" height="60" style="transform: translateX(-5%) translateY(30%); margin-top:-30px; margin-bottom:-20px" v-tooltip.left-middle="tipContent"></canvas>
         <div class="row res_row">
           <div class="col-md-4" style="transform: translateY(38px) translateX(-20px);">
             <div class='star-ratings-sprite'><span :style="{'width': `${this.restaurant.stars * 20}%`}" class='star-ratings-sprite-rating'></span>
@@ -35,29 +35,16 @@ import DataService from '../../services/data-service';
 export default {
     name: 'RestaurantList',
     mounted() {
-        const index = this.getAvgHealthIndex();
-        const color = this.getColor(index);
-        d3.select(`#a${this.restaurant.business_id}a`).select('.card').style('background-color', color);
-        this.city = DataService.getCity();
-        this.URL = this.getResaurantUrl(this.restaurant.business_id);
-        // this.background = this.getColor(this.getAvgHealthIndex());
-        this.tipContent = `<div><img src='http://localhost:8888/${this.city}/${this.restaurant.images[0].image}' /></div>`;
-        this.tipContent = '<div>';
-        for (let i = 0; i < this.restaurant.images.length; i += 1) {
-            if (i % 7 === 0 && i !== 0) {
-                this.tipContent += '<br />';
-            }
-            this.tipContent += `<img src='http://localhost:8888/${this.city}/${this.restaurant.images[i].image}' style='width: 50px; height: 50px;'/>`;
-        }
-        this.tipContent += '</div>';
+        this.r(this.restaurant);
     },
     data() {
         return {
-            background: undefined,
-            city: undefined,
             URL: undefined,
             tip: undefined,
             tipContent: '',
+            canvasWidth: 200,
+            canvasHeight: 60,
+            Gap: 2,
         };
     },
     props: {
@@ -65,41 +52,31 @@ export default {
         index: Number,
     },
     watch: {
-    },
-    directives: {
-        drawMosaics(canvasElement, binding) {
-            const imageColors = [];
-            const images = binding.value.restaurant.images;
-            images.map((img) => {
-                imageColors.push(binding.value.getColor(img.health_index));
-                return 0;
-            });
-            const ctx = canvasElement.getContext('2d');
-            // ctx.shadowColor = 'grey';
-            // ctx.shadowBlur = 10;
-            // ctx.shadowOffsetX = 5;
-            // ctx.shadowOffsetY = 5;
-            ctx.clearRect(0, 0, 200, 60);
-            for (let row = 0; row < 3; row += 1) {
-                for (let colume = 0; colume < 10; colume += 1) {
-                    if ((row * 10) + colume >= images.length) {
-                        return;
-                    }
-                    ctx.beginPath();
-                    ctx.fillStyle = imageColors[(row * 10) + colume];
-                    ctx.rect(colume * 20, row * 20, 20, 20);
-                    ctx.fill();
-                }
-            }
+        restaurant: function foo(newValue) {
+            this.r(newValue);
         },
     },
+    directives: {
+    },
     methods: {
-        getAvgHealthIndex() {
-            let index = 0;
-            this.restaurant.images.forEach((img) => {
-                index += img.health_index;
-            });
-            return index / this.restaurant.images.length;
+        r(restaurant) {
+            console.log('info', restaurant, this.index);
+            this.URL = this.getResaurantUrl(restaurant.business_id);
+            let tc = '';
+            tc = '<div>';
+            for (let i = 0; i < restaurant.images.length; i += 1) {
+                if (i % 7 === 0 && i !== 0) {
+                    tc += '<br />';
+                }
+                tc += `<img src='http://localhost:8888/${restaurant.city}/${restaurant.images[i].image}' style='width: 50px; height: 50px;'/>`;
+            }
+            tc += '</div>';
+            this.tipContent = tc;
+            // const canvasId = 'canvas'.concat(restaurant.business_id);
+            const canvas = document.getElementsByTagName('canvas');
+            // console.log('canvas', canvasId, canvas);
+            this.drawMosaics(canvas[this.index], restaurant.images);
+            console.log('render');
         },
         getColor(number) {
             const colors = ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#ffffff', '#92c5de', '#4393c3', '#2166ac', '#053061'];
@@ -120,7 +97,7 @@ export default {
             const index = DataService.id2index[id];
             const restaurant = DataService.data[index];
             const name = this.processName(restaurant.name);
-            const cityName = this.processName(this.city);
+            const cityName = this.processName(restaurant.city);
             const URL = `https://en.yelp.com.hk/biz_photos/${[name, cityName].join('-')}?tab=food`;
             return URL;
         },
@@ -132,6 +109,32 @@ export default {
         },
         mouseEnterDiv() {
             PipeService.$emit(PipeService.MOUSEENTER_DIV, this.restaurant.business_id);
+        },
+        getRestaurantColor() {
+            let index = 0;
+            this.restaurant.images.forEach((img) => {
+                index += img.health_index;
+            });
+            index /= this.restaurant.images.length;
+            return this.getColor(index);
+        },
+        drawMosaics(canvasElement, images) {
+            const imageColors = [];
+            images.sort((img1, img2) => img1.health_index > img2.health_index);
+            images.map((img) => {
+                imageColors.push(this.getColor(img.health_index));
+                return 0;
+            });
+            const ctx = canvasElement.getContext('2d');
+            ctx.clearRect(0, 0, 200, 60);
+            const rectWidth = (200 / images.length) - 2;
+            for (let col = 0; col < images.length; col += 1) {
+                ctx.beginPath();
+                ctx.fillStyle = imageColors[col];
+                ctx.rect(col * (rectWidth + 2),
+                    0, rectWidth, 60);
+                ctx.fill();
+            }
         },
     },
 };

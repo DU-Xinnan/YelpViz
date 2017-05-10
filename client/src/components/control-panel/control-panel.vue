@@ -18,7 +18,7 @@
             </ul>
        </div>
        <div v-if="this.data.length > 0">
-            <restaurant-list  v-for="(restaurant, index) in this.data[currentPage].restaurants" :restaurant="restaurant" :index="index"></restaurant-list>
+            <restaurant-list  v-for="(restaurant, index) in this.data[currentPage].restaurants" :restaurant.sync="restaurant" :index.sync="index" keep-alive></restaurant-list>
        </div>
     </div>
 </template>
