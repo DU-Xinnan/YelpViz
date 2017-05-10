@@ -86,7 +86,7 @@ export default {
                 svg.append('text')
                     .attr('font-size', '10px')
                     .attr('fill', () => colorScale(i))
-                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 3)},
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 4)},
                         ${(this.canvasHeight / 5) + (VERTICAL_MARGIN * i)})`)
                     // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
                     // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
@@ -419,7 +419,7 @@ export default {
                 svg.append('text')
                     .attr('font-size', '10px')
                     .attr('fill', () => colorScale(i))
-                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 3)},
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 4)},
                         ${(this.canvasHeight / 5) + (VERTICAL_MARGIN * i)})`)
                     // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
                     // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
