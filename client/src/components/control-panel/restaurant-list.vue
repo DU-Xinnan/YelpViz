@@ -120,11 +120,18 @@ export default {
         },
         drawMosaics(canvasElement, images) {
             const imageColors = [];
-            images.sort((img1, img2) => img1.health_index > img2.health_index);
+            images.sort(this.compare);
             images.map((img) => {
-                imageColors.push(this.getColor(img.health_index));
+                console.log('sort health ind', img.health_index);
                 return 0;
             });
+            // images.map((img) => {
+            //     imageColors.push(this.getColor(img.health_index));
+            //     return 0;
+            // });
+            for (let i = 0; i < images.length; i += 1) {
+                imageColors.push(this.getColor(images[i].health_index));
+            }
             const ctx = canvasElement.getContext('2d');
             ctx.clearRect(0, 0, 200, 60);
             const rectWidth = (200 / images.length) - 2;
@@ -135,6 +142,15 @@ export default {
                     0, rectWidth, 60);
                 ctx.fill();
             }
+        },
+        compare(a, b) {
+            if (a.health_index < b.health_index) {
+                return 1;
+            }
+            if (a.health_index > b.health_index) {
+                return -1;
+            }
+            return 0;
         },
     },
 };
