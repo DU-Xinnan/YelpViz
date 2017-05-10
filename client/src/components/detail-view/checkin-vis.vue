@@ -78,6 +78,39 @@ export default {
                 startAngle += angle;
             }
 
+            const colorScale = d3.scaleLinear()
+                .domain([0, 1, 2, 3, 4, 5, 6])
+                .range(['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69']);
+
+            for (let i = 0; i <= 6; i += 1) {
+                svg.append('text')
+                    .attr('font-size', '10px')
+                    .attr('fill', () => colorScale(i))
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 2)},
+                        ${(this.canvasHeight / 5) + (VERTICAL_MARGIN * i)})`)
+                    // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
+                    // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
+                    .text(() => {
+                        switch (i) {
+                            case 1:
+                                return 'Mon';
+                            case 2:
+                                return 'Tue';
+                            case 3:
+                                return 'Wed';
+                            case 4:
+                                return 'Thu';
+                            case 5:
+                                return 'Fri';
+                            case 6:
+                                return 'Sat';
+                            default:
+                                break;
+                        }
+                        return 'Sun';
+                    });
+            }
+
             let maxFlow = 0;
             if (this.checkinTime[id] !== undefined) {
                 Object.keys(this.checkinTime[id]).forEach((weekday) => {
@@ -233,7 +266,7 @@ export default {
             const svg = d3.select(this.$refs.checkincanvas).select('svg').select('#container');
             const flowScale = d3.scaleLinear()
                 .domain([0, maxhourFlow])
-                .range([1, this.config.clockRadius]);
+                .range([1, this.config.clockRadius - 10]);
             const zeroflow = flowScale(data[0]);
             const xZero = (zeroflow) * Math.cos((0 *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
@@ -242,17 +275,17 @@ export default {
             let previousX = xZero;
             let previousY = yZero;
             Object.keys(data).forEach((key) => {
-                if (key !== 0) {
+                if (key !== '0') {
                     const flow = flowScale(data[key]);
-                    const xCoor = (flow) * Math.cos((key *
+                    const xCoor = (flow) * Math.cos((parseInt(key, 10) *
                             ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
-                    const yCoor = (flow) * Math.sin((key *
+                    const yCoor = (flow) * Math.sin((parseInt(key, 10) *
                             ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
                     svg.append('line')
-                        .attr('x1', previousX)
-                        .attr('y1', previousY)
-                        .attr('x2', xCoor)
-                        .attr('y2', yCoor)
+                        .attr('x1', xCoor)
+                        .attr('y1', yCoor)
+                        .attr('x2', previousX)
+                        .attr('y2', previousY)
                         .attr('stroke-width', 1)
                         .attr('stroke-opacity', 1)
                         .attr('stroke', 'orange');
@@ -261,10 +294,10 @@ export default {
                 }
             });
             svg.append('line')
-                .attr('x1', previousX)
-                .attr('y1', previousY)
-                .attr('x2', xZero)
-                .attr('y2', yZero)
+                .attr('x1', xZero)
+                .attr('y1', yZero)
+                .attr('x2', previousX)
+                .attr('y2', previousY)
                 .attr('stroke-width', 1)
                 .attr('stroke-opacity', 1)
                 .attr('stroke', 'orange');
@@ -272,16 +305,16 @@ export default {
         draw_checkinflow(restCheckinData, maxFlow) {
             const flowScale = d3.scaleLinear()
                 .domain([0, maxFlow])
-                .range([1, this.config.clockRadius]);
+                .range([1, this.config.clockRadius - 10]);
             const svg = d3.select(this.$refs.checkincanvas).select('svg').select('#container');
             Object.keys(restCheckinData).forEach((weekday) => {
                 if (restCheckinData[weekday].length !== 0) {
                     restCheckinData[weekday].forEach((timeflow) => {
                         Object.keys(timeflow).forEach((key) => {
                             const flow = flowScale(timeflow[key]);
-                            const xCoor = (flow) * Math.cos((key *
+                            const xCoor = (flow) * Math.cos((parseInt(key, 10) *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
-                            const yCoor = (flow) * Math.sin((key *
+                            const yCoor = (flow) * Math.sin((parseInt(key, 10) *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
                             svg.append('circle')
                             .attr('r', this.config.dotRadius)
@@ -375,7 +408,39 @@ export default {
                 startAngle += angle;
             }
 
-            console.log(this.radar);
+            const colorScale = d3.scaleLinear()
+                .domain([0, 1, 2, 3, 4, 5, 6])
+                .range(['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69']);
+
+            for (let i = 0; i <= 6; i += 1) {
+                svg.append('text')
+                    .attr('font-size', '10px')
+                    .attr('fill', () => colorScale(i))
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 2)},
+                        ${(this.canvasHeight / 5) + (VERTICAL_MARGIN * i)})`)
+                    // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
+                    // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
+                    .text(() => {
+                        switch (i) {
+                            case 1:
+                                return 'Mon';
+                            case 2:
+                                return 'Tue';
+                            case 3:
+                                return 'Wed';
+                            case 4:
+                                return 'Thu';
+                            case 5:
+                                return 'Fri';
+                            case 6:
+                                return 'Sat';
+                            default:
+                                break;
+                        }
+                        return 'Sun';
+                    });
+            }
+
             let maxhourFlow = 0;
             Object.keys(this.radar).forEach((key) => {
                 maxhourFlow = this.radar[key] > maxhourFlow ? this.radar[key] : maxhourFlow;
