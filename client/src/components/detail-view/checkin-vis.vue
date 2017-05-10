@@ -84,10 +84,10 @@ export default {
 
             for (let i = 0; i <= 6; i += 1) {
                 svg.append('text')
-                    .attr('font-size', '25px')
+                    .attr('font-size', '20px')
                     .attr('fill', () => colorScale(i))
-                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 10)},
-                        ${(this.canvasHeight / 5) + (2.5 * (VERTICAL_MARGIN * i))})`)
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 9)},
+                        ${(this.canvasHeight / 5) + (1.5 * (VERTICAL_MARGIN * i))})`)
                     // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
                     // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
                     .text(() => {
@@ -273,8 +273,8 @@ export default {
             const zeroflow = flowScale(data[0]);
             const xZero = (zeroflow) * Math.cos((0 *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
-            const yZero = (zeroflow) * Math.sin((0 *
-                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+            const yZero = -((zeroflow) * Math.sin((0 *
+                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2)));
             let previousX = xZero;
             let previousY = yZero;
             Object.keys(data).forEach((key) => {
@@ -282,8 +282,8 @@ export default {
                     const flow = flowScale(data[key]);
                     const xCoor = (flow) * Math.cos((parseInt(key, 10) *
                             ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
-                    const yCoor = (flow) * Math.sin((parseInt(key, 10) *
-                            ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+                    const yCoor = -((flow) * Math.sin((parseInt(key, 10) *
+                            ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2)));
                     svg.append('line')
                         .attr('x1', xCoor)
                         .attr('y1', yCoor)
@@ -317,8 +317,8 @@ export default {
                             const flow = flowScale(timeflow[key]);
                             const xCoor = (flow) * Math.cos((parseInt(key, 10) *
                                 ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
-                            const yCoor = (flow) * Math.sin((parseInt(key, 10) *
-                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2));
+                            const yCoor = -((flow) * Math.sin((parseInt(key, 10) *
+                                ((360 / 24) * (Math.PI / 180))) - (Math.PI / 2)));
                             svg.append('circle')
                             .attr('r', this.config.dotRadius)
                             .attr('cx', xCoor)
@@ -417,10 +417,10 @@ export default {
 
             for (let i = 0; i <= 6; i += 1) {
                 svg.append('text')
-                    .attr('font-size', '30px')
+                    .attr('font-size', '20px')
                     .attr('fill', () => colorScale(i))
-                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 10)},
-                        ${(this.canvasHeight / 5) + (2.5 * (VERTICAL_MARGIN * i))})`)
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 9)},
+                        ${(this.canvasHeight / 5) + (1.5 * (VERTICAL_MARGIN * i))})`)
                     // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
                     // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
                     .text(() => {
