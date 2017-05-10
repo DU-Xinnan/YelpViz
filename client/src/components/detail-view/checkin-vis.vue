@@ -84,10 +84,10 @@ export default {
 
             for (let i = 0; i <= 6; i += 1) {
                 svg.append('text')
-                    .attr('font-size', '10px')
+                    .attr('font-size', '25px')
                     .attr('fill', () => colorScale(i))
-                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 8)},
-                        ${(this.canvasHeight / 5) + (5 * (VERTICAL_MARGIN * i))})`)
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 10)},
+                        ${(this.canvasHeight / 5) + (2.5 * (VERTICAL_MARGIN * i))})`)
                     // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
                     // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
                     .text(() => {
@@ -417,10 +417,10 @@ export default {
 
             for (let i = 0; i <= 6; i += 1) {
                 svg.append('text')
-                    .attr('font-size', '50px')
+                    .attr('font-size', '30px')
                     .attr('fill', () => colorScale(i))
-                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 8)},
-                        ${(this.canvasHeight / 5) + (5 * (VERTICAL_MARGIN * i))})`)
+                    .attr('transform', `translate(${(this.canvasWidth / 2) - (HORIZONTAL_MARGIN * 10)},
+                        ${(this.canvasHeight / 5) + (2.5 * (VERTICAL_MARGIN * i))})`)
                     // .attr('x', this.canvasWidth - HORIZONTAL_MARGIN)
                     // .attr('y', this.canvasHeight - (VERTICAL_MARGIN * i))
                     .text(() => {

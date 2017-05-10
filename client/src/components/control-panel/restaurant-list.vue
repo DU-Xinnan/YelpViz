@@ -60,7 +60,7 @@ export default {
     },
     methods: {
         r(restaurant) {
-            console.log('info', restaurant, this.index);
+            // console.log('info', restaurant, this.index);
             this.URL = this.getResaurantUrl(restaurant.business_id);
             let tc = '';
             tc = '<div>';
@@ -76,7 +76,7 @@ export default {
             const canvas = document.getElementsByTagName('canvas');
             // console.log('canvas', canvasId, canvas);
             this.drawMosaics(canvas[this.index], restaurant.images);
-            console.log('render');
+            // console.log('render');
         },
         getColor(number) {
             const colors = ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#ffffff', '#92c5de', '#4393c3', '#2166ac', '#053061'];
