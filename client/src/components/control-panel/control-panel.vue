@@ -3,6 +3,8 @@
         <h1 style="margin-top: 5%">Control Panel</h1>
        <div class='control-column'>
             <data-loader></data-loader>
+            <attr-query :setting="setting"></attr-query>
+            <attr-list :setting="setting"></attr-list>
        </div>
        <div v-if="this.data.length > 0">
            <ul class="pagination justify-content-center">
