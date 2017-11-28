@@ -3,11 +3,11 @@
 ### Project Description
 ![Alt text](./client/src/images/SysOverview.png?raw=true "System Overview")
 
-`[strong]YelpViz[strong]`, which is a visuaization system aiming at exploring restaurants locations with differnt health scores in major cities of US. This project of COMP4901F `Data Visualization` @HKUST and also a champion hackthon project for `HealthCare` division of hackUST.
+***YelpViz***, which is a visuaization system aiming at exploring restaurants locations with differnt health scores in major cities of US. This project of COMP4901F `Data Visualization` @HKUST and also a champion hackthon project for `HealthCare` division of hackUST.
 
 It’s the first time that Yelp dataset provides photos for each restaurant, so we decide to make use of these images and hopefully we can have some new findings in the end. However, images provided by Yelp had no meaning since each image does not associate with its restaurant, thus they were just a mess originally. To deal with this challenge, we decided to crawl all food images in a given city and manually labled each image with a healthy score.
 
-In this project, we used deep learning to predict how “healthy” a food is by analysing its photo as well as the title of the photo. First, after crawling more than 5000 food images of two major cities, `Cleveland` and `Madison`, from Yelp dataset and labling each image with a healthy score, we trained these images as samples with neural network `GoogleNet[https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf]`, which achieved 85% accuracy in the end.
+In this project, we used deep learning to predict how “healthy” a food is by analysing its photo as well as the title of the photo. First, after crawling more than 5000 food images of two major cities, `Cleveland` and `Madison`, from Yelp dataset and labling each image with a healthy score, we trained these images as samples with neural network [GoogleNet](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf), which achieved 85% accuracy in the end.
 
 > Note that the dataset is almost 2GB.
 
