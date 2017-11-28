@@ -9,6 +9,19 @@ It’s the first time that Yelp dataset provides photos for each restaurant, so 
 
 In this project, we used deep learning to predict how “healthy” a food is by analysing its photo as well as the title of the photo. First, after crawling more than 5000 food images of two major cities, `Cleveland` and `Madison`, from Yelp dataset and labling each image with a healthy score, we trained these images as samples with neural network [GoogleNet](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf), which achieved 85% accuracy in the end.
 
+Then, the visualization system consists of five components - Control Panel, VizMap, CheckIn-Flow Clock, TextCloud, Review Sentiment Analysis Chart.
+
+`Control Panel`: Enable city and restaurant selection, implement paging and healthy score sorting.
+
+`VizMap`: Hexagon design to reduce visual clutters.
+
+`CheckIn-Flow Clock`: Population flow indicates restaurant popularity and the time when people prefer having meals
+
+`TextCloud`: Indicate food themes in the city and food popularity
+
+`Review Sentiment`: customers' attitudes towards the given restaurant.
+
+
 > Note that the dataset is almost 2GB.
 
 ### Prerequest
